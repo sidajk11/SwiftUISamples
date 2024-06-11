@@ -7,8 +7,26 @@
 
 import SwiftUI
 
+extension LoginView {
+    enum Route: Hashable {
+        case main
+    }
+    
+    // Builds the views
+    @ViewBuilder func view(for route: Route) -> some View {
+        switch route {
+        case .main:
+            MainView()
+                .environmentObject(router)
+        }
+    }
+}
+
+
 struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var router: Router
+    
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var geometrySize: CGSize = .zero
@@ -19,7 +37,7 @@ struct LoginView: View {
     enum Field: Int, Hashable {
         case username, password
     }
-
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -55,7 +73,7 @@ struct LoginView: View {
                 .padding(.bottom, 400)
             
             userIdTextField
-
+            
             passwordTextField
             
             loginButton
@@ -67,6 +85,7 @@ struct LoginView: View {
         Button(action: {
             print("Username: \(username), Password: \(password)")
             username = Bool.random() ? "test" : ""
+            router.navigateTo(route: Route.main)
         }) {
             Text("Login")
                 .frame(maxWidth: .infinity)
@@ -75,6 +94,9 @@ struct LoginView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 .padding(.horizontal)
+        }
+        .navigationDestination(for: Route.self) { route in
+            view(for: route)
         }
     }
     

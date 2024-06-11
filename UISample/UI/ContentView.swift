@@ -9,18 +9,6 @@ import SwiftUI
 import CoreData
 import Combine
 
-class Router<T> where T: Hashable {
-    @Published var route: T?
-    
-    func navigateTo(route: T) {
-        self.route = route
-    }
-    
-    func reset() {
-        route = nil
-    }
-}
-
 extension ContentView {
     enum Route: Hashable {
         case detail(text: String)
@@ -34,6 +22,7 @@ extension ContentView {
             ItemDetailView(timestamp: text)
         case .login:
             LoginView()
+                .environmentObject(router)
         }
     }
 }
@@ -64,7 +53,7 @@ struct ContentView: View {
     
     var index: Int = 0
     
-    let router = Router<Route>()
+    @ObservedObject var router = Router()
 
     var body: some View {
         NavigationStack {
@@ -75,14 +64,9 @@ struct ContentView: View {
     
     var content: some View {
         VStack {
-            NavigationStack {
+            NavigationStack(path: $router.path) {
                 List {
                     ForEach(items) { item in
-//                        Button(action: {
-//                            router.navigateTo(route: .detail(text: "Item at \(formatDate(item.timestamp))"))
-//                        }) {
-//                            Text(formatDate(item.timestamp))
-//                        }
                         let route: Route = .detail(text: "Item at \(formatDate(item.timestamp))")
                         NavigationLink("Item at \(formatDate(item.timestamp))", value: route)
                     }
@@ -103,34 +87,17 @@ struct ContentView: View {
                     view(for: route)
                 }
                 
-//                Button(action: {
-//                    isLoginActive = true
-//                }) {
-//                    Text("Login")
-//                        .padding()
-//                        .background(Color.blue)
-//                        .foregroundColor(.white)
-//                        .cornerRadius(8)
-//                }
-//                .navigationDestination(isPresented: $isLoginActive) {
-//                    LoginView()
-//                }
-//                
-//                // Add the Login Button
-//                Button(action: {
-//                    currentSelection = 1
-//                }) {
-//                    Text("Login Present")
-//                        .padding()
-//                        .background(Color.blue)
-//                        .foregroundColor(.white)
-//                        .cornerRadius(8)
-//                }
-//                .padding()
-//                .fullScreenCover(isPresented: $isLoginPresented) {
-//                    LoginView()
-//                }
+                Button(action: {
+                    router.navigateTo(route: Route.login)
+                }) {
+                    Text("Login")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                }
             }
+            .environmentObject(router)
         }
     }
 

@@ -14,10 +14,90 @@
             filePath = "UISample/UI/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "isNavActive"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "C282A4F9-49E9-4D0C-958B-F7CED10CDAEF - d49bf3afc12ef5f8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UISample.ContentView.init(currentSelection: Swift.Optional&lt;Swift.Int32&gt;, index: Swift.Int, router: UISample.Router) -&gt; UISample.ContentView"
+                  moduleName = "UISample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeong-yeongmin/Documents/Works/Projects/SwiftUI/SwiftUISamples/UISample/UI/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "392">
+               </Location>
+               <Location
+                  uuid = "C282A4F9-49E9-4D0C-958B-F7CED10CDAEF - d49bf3afc12ef219"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UISample.ContentView.init(currentSelection: Swift.Optional&lt;Swift.Int32&gt;, index: Swift.Int, router: UISample.Router) -&gt; UISample.ContentView"
+                  moduleName = "UISample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeong-yeongmin/Documents/Works/Projects/SwiftUI/SwiftUISamples/UISample/UI/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "392">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F829F8DF-46A5-48EE-B189-E7B4C2D2E127"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "UISample/UI/LoginView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "closeButton"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "F829F8DF-46A5-48EE-B189-E7B4C2D2E127 - 238956eaef1a921a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.clipShape&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.Shape&gt;(_: &#x3c4;_1_0, style: SwiftUI.FillStyle) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt; in UISample.LoginView.closeButton.getter : some"
+                  moduleName = "UISample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeong-yeongmin/Documents/Works/Projects/SwiftUI/SwiftUISamples/UISample/UI/LoginView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "F829F8DF-46A5-48EE-B189-E7B4C2D2E127 - a66a8c952a42a02d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt; in UISample.LoginView.closeButton.getter : some"
+                  moduleName = "UISample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeong-yeongmin/Documents/Works/Projects/SwiftUI/SwiftUISamples/UISample/UI/LoginView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "244">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
