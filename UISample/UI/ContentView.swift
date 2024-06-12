@@ -10,7 +10,7 @@ import CoreData
 import Combine
 
 extension ContentView {
-    enum Route: Hashable {
+    enum Route: Routable {
         case detail(text: String)
         case login
     }
@@ -22,7 +22,7 @@ extension ContentView {
             ItemDetailView(timestamp: text)
         case .login:
             LoginView()
-                .environmentObject(router)
+                .environmentObject(navRouter)
         }
     }
 }
@@ -53,7 +53,7 @@ struct ContentView: View {
     
     var index: Int = 0
     
-    @ObservedObject var router = Router()
+    @ObservedObject var navRouter = NavigationRouter()
 
     var body: some View {
         NavigationStack {
@@ -64,40 +64,46 @@ struct ContentView: View {
     
     var content: some View {
         VStack {
-            NavigationStack(path: $router.path) {
-                List {
-                    ForEach(items) { item in
-                        let route: Route = .detail(text: "Item at \(formatDate(item.timestamp))")
-                        NavigationLink("Item at \(formatDate(item.timestamp))", value: route)
+            NavigationStack(path: $navRouter.path) {
+                rootContent
+                    .navigationDestination(for: Route.self) { route in
+                        view(for: route)
                     }
-                    .onDelete(perform: deleteItems)
+            }
+            .environmentObject(navRouter)
+        }
+    }
+    
+    private var rootContent: some View {
+        VStack {
+            List {
+                ForEach(items) { item in
+                    let route: Route = .detail(text: "Item at \(formatDate(item.timestamp))")
+                    NavigationLink("Item at \(formatDate(item.timestamp))", value: route)
                 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        EditButton()
+                .onDelete(perform: deleteItems)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                }
+                ToolbarItem {
+                    Button(action: addItem) {
+                        Label("Add Item", systemImage: "plus")
                     }
-                    ToolbarItem {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
-                        }
-                    }
-                }
-                .navigationTitle("Home")
-                .navigationDestination(for: Route.self) { route in
-                    view(for: route)
-                }
-                
-                Button(action: {
-                    router.navigateTo(route: Route.login)
-                }) {
-                    Text("Login")
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(8)
                 }
             }
-            .environmentObject(router)
+            .navigationTitle("Home")
+            
+            Button(action: {
+                navRouter.push(route: Route.login)
+            }) {
+                Text("Login")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
         }
     }
 

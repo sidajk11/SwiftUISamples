@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-class Router: ObservableObject {
+class NavigationRouter: ObservableObject {
     @Published var path = NavigationPath()
     
-    func navigateTo<T: Hashable>(route: T) {
+    func push<T: Routable>(route: T) {
         path.append(route)
     }
     
@@ -20,5 +20,23 @@ class Router: ObservableObject {
     
     func popup(_ k: Int) {
         path.removeLast(k)
+    }
+    
+    func popupToRoot() {
+        path.removeLast(path.count)
+    }
+}
+
+class PresentRouter<T: Routable>: ObservableObject {
+    
+    @Published public var sheet: T?
+    @Published public var fullScreen: T?
+    
+    func sheet(route: T) {
+        sheet = route
+    }
+    
+    func fullScreenCover(route: T) {
+        fullScreen = route
     }
 }

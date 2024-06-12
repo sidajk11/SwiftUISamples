@@ -8,16 +8,16 @@
 import SwiftUI
 
 extension LoginView {
-    enum Route: Hashable {
+    enum Route: Routable {
         case main
     }
     
     // Builds the views
-    @ViewBuilder func view(for route: Route) -> some View {
+    @ViewBuilder func routing(for route: Route) -> some View {
         switch route {
         case .main:
             MainView()
-                .environmentObject(router)
+                .environmentObject(navRouter)
         }
     }
 }
@@ -25,7 +25,7 @@ extension LoginView {
 
 struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var router: Router
+    @EnvironmentObject var navRouter: NavigationRouter
     
     @State private var username: String = ""
     @State private var password: String = ""
@@ -85,7 +85,7 @@ struct LoginView: View {
         Button(action: {
             print("Username: \(username), Password: \(password)")
             username = Bool.random() ? "test" : ""
-            router.navigateTo(route: Route.main)
+            navRouter.push(route: Route.main)
         }) {
             Text("Login")
                 .frame(maxWidth: .infinity)
@@ -96,7 +96,7 @@ struct LoginView: View {
                 .padding(.horizontal)
         }
         .navigationDestination(for: Route.self) { route in
-            view(for: route)
+            routing(for: route)
         }
     }
     
