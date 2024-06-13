@@ -10,6 +10,14 @@
 		643C32662C17E17C00B60246 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32652C17E17C00B60246 /* MainView.swift */; };
 		643C32692C17E1AE00B60246 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32682C17E1AE00B60246 /* Router.swift */; };
 		643C326B2C18068200B60246 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C326A2C18068200B60246 /* AppDelegate.swift */; };
+		6484BB6C2C1A7DC600B1D158 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB6B2C1A7DC600B1D158 /* CellConfigurator.swift */; };
+		6484BB6E2C1A861B00B1D158 /* Publisher+WeakAssign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB6D2C1A861B00B1D158 /* Publisher+WeakAssign.swift */; };
+		6484BB702C1A9F1F00B1D158 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB6F2C1A9F1F00B1D158 /* ProfileView.swift */; };
+		6484BB722C1AA0DD00B1D158 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB712C1AA0DD00B1D158 /* ProfileEditView.swift */; };
+		6484BB742C1AA0E600B1D158 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB732C1AA0E600B1D158 /* ProfileDetailView.swift */; };
+		6484BB772C1AA1D300B1D158 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB762C1AA1D300B1D158 /* CloseButton.swift */; };
+		6484BB7A2C1AD0C600B1D158 /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB792C1AD0C600B1D158 /* APICall.swift */; };
+		6484BB7C2C1AD17F00B1D158 /* WebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB7B2C1AD17F00B1D158 /* WebRepository.swift */; };
 		6492DDA52C1934660054FE06 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492DDA42C1934660054FE06 /* SheetView.swift */; };
 		6492DDA72C19347C0054FE06 /* PresentingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492DDA62C19347C0054FE06 /* PresentingView.swift */; };
 		6492DDA92C1934A80054FE06 /* SubSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492DDA82C1934A80054FE06 /* SubSheetView.swift */; };
@@ -30,6 +38,14 @@
 		643C32652C17E17C00B60246 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		643C32682C17E1AE00B60246 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		643C326A2C18068200B60246 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6484BB6B2C1A7DC600B1D158 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
+		6484BB6D2C1A861B00B1D158 /* Publisher+WeakAssign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+WeakAssign.swift"; sourceTree = "<group>"; };
+		6484BB6F2C1A9F1F00B1D158 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		6484BB712C1AA0DD00B1D158 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		6484BB732C1AA0E600B1D158 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
+		6484BB762C1AA1D300B1D158 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		6484BB792C1AD0C600B1D158 /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
+		6484BB7B2C1AD17F00B1D158 /* WebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRepository.swift; sourceTree = "<group>"; };
 		6492DDA42C1934660054FE06 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		6492DDA62C19347C0054FE06 /* PresentingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentingView.swift; sourceTree = "<group>"; };
 		6492DDA82C1934A80054FE06 /* SubSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubSheetView.swift; sourceTree = "<group>"; };
@@ -70,6 +86,7 @@
 		645187812C0EAA0C0033A50B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				6484BB752C1AA1C900B1D158 /* Components */,
 				64E09DEE2C09C4D600D763D9 /* ContentView.swift */,
 				64E09DFF2C09C57B00D763D9 /* LoginView.swift */,
 				643C32652C17E17C00B60246 /* MainView.swift */,
@@ -77,6 +94,9 @@
 				6492DDA82C1934A80054FE06 /* SubSheetView.swift */,
 				6492DDA62C19347C0054FE06 /* PresentingView.swift */,
 				6492DDAC2C194B7D0054FE06 /* SettingView.swift */,
+				6484BB6F2C1A9F1F00B1D158 /* ProfileView.swift */,
+				6484BB712C1AA0DD00B1D158 /* ProfileEditView.swift */,
+				6484BB732C1AA0E600B1D158 /* ProfileDetailView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -98,6 +118,23 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		6484BB752C1AA1C900B1D158 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6484BB762C1AA1D300B1D158 /* CloseButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6484BB782C1AD0BA00B1D158 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6484BB792C1AD0C600B1D158 /* APICall.swift */,
+				6484BB7B2C1AD17F00B1D158 /* WebRepository.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		64E09DE02C09C4D600D763D9 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +154,7 @@
 		64E09DEB2C09C4D600D763D9 /* UISample */ = {
 			isa = PBXGroup;
 			children = (
+				6484BB782C1AD0BA00B1D158 /* Network */,
 				643C32672C17E1A400B60246 /* Router */,
 				64EFDFD92C0FF56900EBA864 /* Utilities */,
 				645187832C0EAA3F0033A50B /* Application */,
@@ -142,6 +180,8 @@
 			isa = PBXGroup;
 			children = (
 				64EFDFDA2C0FF57600EBA864 /* CancelBag.swift */,
+				6484BB6B2C1A7DC600B1D158 /* CellConfigurator.swift */,
+				6484BB6D2C1A861B00B1D158 /* Publisher+WeakAssign.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -217,18 +257,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				64E09DF62C09C4D800D763D9 /* Persistence.swift in Sources */,
+				6484BB7C2C1AD17F00B1D158 /* WebRepository.swift in Sources */,
 				6492DDAB2C1937D50054FE06 /* Routable.swift in Sources */,
 				643C32662C17E17C00B60246 /* MainView.swift in Sources */,
 				64E09DF92C09C4D800D763D9 /* UISample.xcdatamodeld in Sources */,
+				6484BB6C2C1A7DC600B1D158 /* CellConfigurator.swift in Sources */,
 				6492DDA92C1934A80054FE06 /* SubSheetView.swift in Sources */,
 				64E09DEF2C09C4D600D763D9 /* ContentView.swift in Sources */,
 				6492DDAD2C194B7D0054FE06 /* SettingView.swift in Sources */,
 				643C32692C17E1AE00B60246 /* Router.swift in Sources */,
 				6492DDA72C19347C0054FE06 /* PresentingView.swift in Sources */,
+				6484BB702C1A9F1F00B1D158 /* ProfileView.swift in Sources */,
 				6492DDA52C1934660054FE06 /* SheetView.swift in Sources */,
 				64E09E002C09C57B00D763D9 /* LoginView.swift in Sources */,
 				64E09DED2C09C4D600D763D9 /* UISampleApp.swift in Sources */,
+				6484BB7A2C1AD0C600B1D158 /* APICall.swift in Sources */,
+				6484BB722C1AA0DD00B1D158 /* ProfileEditView.swift in Sources */,
+				6484BB6E2C1A861B00B1D158 /* Publisher+WeakAssign.swift in Sources */,
 				64EFDFDB2C0FF57600EBA864 /* CancelBag.swift in Sources */,
+				6484BB742C1AA0E600B1D158 /* ProfileDetailView.swift in Sources */,
+				6484BB772C1AA1D300B1D158 /* CloseButton.swift in Sources */,
 				643C326B2C18068200B60246 /* AppDelegate.swift in Sources */,
 				64F8CD4D2C0D6C2700943395 /* Test.swift in Sources */,
 			);
