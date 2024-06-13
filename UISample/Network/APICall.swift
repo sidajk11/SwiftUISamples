@@ -33,7 +33,9 @@ class Request: APICall {
     
     var method: String { return "" }
     
-    var headers: [String: String] { return [:] }
+    var headers: [String: String] {
+        return ["Accept": "application/json"]
+    }
     
     // Data
     var query: [String : Any] { return [:] }
@@ -43,20 +45,6 @@ class Request: APICall {
     var bodyDict: [String : Any] { return [:] }
     
     var formData: [FormData] { return [] }
-}
-
-class FormData: NSObject {
-    var name: String = ""
-    var data: Data = Data()
-    var fileName: String?
-    var mimeType: String?
-    
-    init(name: String, data: Data, fileName: String? = nil, mimeType: String? = nil) {
-        self.name = name
-        self.data = data
-        self.fileName = fileName
-        self.mimeType = mimeType
-    }
 }
 
 enum APIError: Swift.Error {
@@ -87,6 +75,12 @@ extension APICall {
         request.allHTTPHeaderFields = headers
         if let body = self.bodyObject, let bodyData = try? JSONEncoder().encode(body) {
             request.httpBody = bodyData
+        }
+        else if formData.count > 0 {
+            let formCreator = MultipartFormCreator(formDataArray: formData)
+            request.httpBody = formCreator.createBody()
+            let (key, value) = formCreator.formDataHeader()
+            request.addValue(key, forHTTPHeaderField: value)
         }
         return request
     }
