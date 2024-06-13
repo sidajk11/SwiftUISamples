@@ -9,23 +9,27 @@ import SwiftUI
 
 extension MainView {
     enum Route: Routable {
-        case sheet
-        case sheetSub(message: String)
+        case term
+        case privacy(message: String)
         case full
         case setting
+        case profile
     }
     
     @ViewBuilder private func routing(route: Route) -> some View {
         switch route {
-        case .sheet:
+        case .term:
             SheetView()
-        case .sheetSub(let message):
+        case .privacy(let message):
             SubSheetView(text: message)
         case .full:
             PresentingView()
         case .setting:
             SettingView()
                 .environmentObject(navRouter)
+        case .profile:
+            ProfileView()
+            
         }
     }
 }
@@ -41,17 +45,21 @@ struct MainView: View {
     @State private var presentingFullScreenCover = false
     
     var body: some View {
+        content
+    }
+    
+    var content: some View {
         VStack {
             Text("Hello, World!")
             
             closeButton
             
-            Button("Show Sheet") {
-                presentRouter.sheet(route: .sheet)
+            Button("Show Turm") {
+                presentRouter.sheet(route: .term)
             }
             
-            Button("Show Sub Sheet") {
-                presentRouter.sheet(route: .sheetSub(message: "this is message"))
+            Button("Show Privacy") {
+                presentRouter.sheet(route: .privacy(message: "this is message"))
             }
             
             Button("Show PresentingView") {
@@ -60,6 +68,10 @@ struct MainView: View {
             
             Button("Show Setting") {
                 navRouter.push(route: Route.setting)
+            }
+            
+            Button("Show Profile") {
+                presentRouter.fullScreenCover(route: .profile)
             }
         }
         .sheet(item: $presentRouter.sheet, content: { route in

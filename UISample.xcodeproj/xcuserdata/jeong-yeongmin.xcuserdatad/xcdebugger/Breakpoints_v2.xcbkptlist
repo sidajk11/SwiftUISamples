@@ -79,6 +79,21 @@
                   endingLineNumber = "45"
                   offsetFromSymbolStart = "392">
                </Location>
+               <Location
+                  uuid = "C282A4F9-49E9-4D0C-958B-F7CED10CDAEF - c7179ac134e093db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UISample.ContentView.init(currentSelection: Swift.Optional&lt;Swift.Int32&gt;, index: Swift.Int, navRouter: UISample.NavigationRouter) -&gt; UISample.ContentView"
+                  moduleName = "UISample"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jeong-yeongmin/Documents/Works/Projects/SwiftUI/SwiftUISamples/UISample/UI/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "392">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
