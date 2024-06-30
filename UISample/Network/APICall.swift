@@ -26,16 +26,14 @@ protocol APICall {
     var formData: [FormData] { get }
 }
 
-class Request: APICall {
+extension APICall {
     var serverUrl: String { return "" }
     
     var path: String { return "" }
     
     var method: String { return "" }
     
-    var headers: [String: String] {
-        return ["Accept": "application/json"]
-    }
+    var headers: [String: String] { return [:] }
     
     // Data
     var query: [String : Any] { return [:] }
