@@ -2,7 +2,7 @@
 //  Loadable.swift
 //  UISample
 //
-//  Created by 정영민 on 6/13/24.
+//  Created by 정영민 on 2024/06/13.
 //
 
 import Foundation
@@ -111,4 +111,3 @@ extension Loadable: Equatable where T: Equatable {
         }
     }
 }
-

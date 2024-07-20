@@ -27,13 +27,17 @@ protocol APICall {
 }
 
 extension APICall {
-    var serverUrl: String { return "" }
+    var serverUrl: String { return "http://127.0.0.1:8000" }
     
     var path: String { return "" }
     
-    var method: String { return "" }
+    var method: String { return "POST" }
     
-    var headers: [String: String] { return [:] }
+    var headers: [String: String] {
+        var header: [String : String] = [:]
+        header["Content-type"] = "application/json"
+        return header
+    }
     
     // Data
     var query: [String : Any] { return [:] }

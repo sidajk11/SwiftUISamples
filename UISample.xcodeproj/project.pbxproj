@@ -14,6 +14,29 @@
 		646706B02C31249B008DB9E3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646706AF2C31249B008DB9E3 /* Request.swift */; };
 		646706B32C3129FF008DB9E3 /* ItemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646706B22C3129FF008DB9E3 /* ItemAPI.swift */; };
 		646706BB2C312E42008DB9E3 /* ItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646706BA2C312E42008DB9E3 /* ItemService.swift */; };
+		6474811C2C455F3A0034CB8A /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474811B2C455F3A0034CB8A /* LoginService.swift */; };
+		6474811E2C4565640034CB8A /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474811D2C4565640034CB8A /* AppEnvironment.swift */; };
+		647481202C4567180034CB8A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474811F2C4567180034CB8A /* UserModel.swift */; };
+		647481222C45676D0034CB8A /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481212C45676D0034CB8A /* TokenModel.swift */; };
+		647481242C4B35450034CB8A /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481232C4B35450034CB8A /* LoginRepository.swift */; };
+		647481272C4B3EAA0034CB8A /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481262C4B3EAA0034CB8A /* DIContainer.swift */; };
+		647481292C4B3ED90034CB8A /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481282C4B3ED90034CB8A /* Store.swift */; };
+		6474812B2C4B3EF20034CB8A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474812A2C4B3EF20034CB8A /* AppState.swift */; };
+		6474812D2C4B3FA00034CB8A /* UserPermissionsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474812C2C4B3FA00034CB8A /* UserPermissionsService.swift */; };
+		6474812F2C4B3FC70034CB8A /* ServicesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474812E2C4B3FC70034CB8A /* ServicesContainer.swift */; };
+		647481332C4B44AA0034CB8A /* DeepLinksHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481302C4B44AA0034CB8A /* DeepLinksHandler.swift */; };
+		647481342C4B44AA0034CB8A /* PushNotificationsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481312C4B44AA0034CB8A /* PushNotificationsHandler.swift */; };
+		647481352C4B44AA0034CB8A /* SystemEventsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481322C4B44AA0034CB8A /* SystemEventsHandler.swift */; };
+		647481372C4B4BC40034CB8A /* LessonDBRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481362C4B4BC40034CB8A /* LessonDBRepository.swift */; };
+		6474813A2C4B4C2A0034CB8A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481392C4B4C2A0034CB8A /* CoreDataStack.swift */; };
+		6474813D2C4B4C3F0034CB8A /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474813B2C4B4C3F0034CB8A /* Helpers.swift */; };
+		6474813E2C4B4C3F0034CB8A /* LazyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474813C2C4B4C3F0034CB8A /* LazyList.swift */; };
+		647481422C4B4C8E0034CB8A /* db_model_v1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6474813F2C4B4C8E0034CB8A /* db_model_v1.xcdatamodeld */; };
+		647481432C4B4C8E0034CB8A /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481412C4B4C8E0034CB8A /* CoreDataHelpers.swift */; };
+		647481452C4B51EC0034CB8A /* LessonMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481442C4B51EC0034CB8A /* LessonMO.swift */; };
+		647481472C4B5BC20034CB8A /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481462C4B5BC20034CB8A /* Lesson.swift */; };
+		6474814A2C4B606A0034CB8A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647481492C4B606A0034CB8A /* BaseViewModel.swift */; };
+		6474814C2C4B60DB0034CB8A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6474814B2C4B60DB0034CB8A /* BaseView.swift */; };
 		6484BB6C2C1A7DC600B1D158 /* CellConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB6B2C1A7DC600B1D158 /* CellConfigurator.swift */; };
 		6484BB6E2C1A861B00B1D158 /* Publisher+WeakAssign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB6D2C1A861B00B1D158 /* Publisher+WeakAssign.swift */; };
 		6484BB702C1A9F1F00B1D158 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB6F2C1A9F1F00B1D158 /* ProfileView.swift */; };
@@ -50,6 +73,29 @@
 		646706AF2C31249B008DB9E3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		646706B22C3129FF008DB9E3 /* ItemAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAPI.swift; sourceTree = "<group>"; };
 		646706BA2C312E42008DB9E3 /* ItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemService.swift; sourceTree = "<group>"; };
+		6474811B2C455F3A0034CB8A /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		6474811D2C4565640034CB8A /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		6474811F2C4567180034CB8A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		647481212C45676D0034CB8A /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		647481232C4B35450034CB8A /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		647481262C4B3EAA0034CB8A /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		647481282C4B3ED90034CB8A /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		6474812A2C4B3EF20034CB8A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		6474812C2C4B3FA00034CB8A /* UserPermissionsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPermissionsService.swift; sourceTree = "<group>"; };
+		6474812E2C4B3FC70034CB8A /* ServicesContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesContainer.swift; sourceTree = "<group>"; };
+		647481302C4B44AA0034CB8A /* DeepLinksHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLinksHandler.swift; sourceTree = "<group>"; };
+		647481312C4B44AA0034CB8A /* PushNotificationsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationsHandler.swift; sourceTree = "<group>"; };
+		647481322C4B44AA0034CB8A /* SystemEventsHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemEventsHandler.swift; sourceTree = "<group>"; };
+		647481362C4B4BC40034CB8A /* LessonDBRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonDBRepository.swift; sourceTree = "<group>"; };
+		647481392C4B4C2A0034CB8A /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		6474813B2C4B4C3F0034CB8A /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		6474813C2C4B4C3F0034CB8A /* LazyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyList.swift; sourceTree = "<group>"; };
+		647481402C4B4C8E0034CB8A /* db_model_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db_model_v1.xcdatamodel; sourceTree = "<group>"; };
+		647481412C4B4C8E0034CB8A /* CoreDataHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
+		647481442C4B51EC0034CB8A /* LessonMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonMO.swift; sourceTree = "<group>"; };
+		647481462C4B5BC20034CB8A /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lesson.swift; sourceTree = "<group>"; };
+		647481492C4B606A0034CB8A /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		6474814B2C4B60DB0034CB8A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		6484BB6B2C1A7DC600B1D158 /* CellConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellConfigurator.swift; sourceTree = "<group>"; };
 		6484BB6D2C1A861B00B1D158 /* Publisher+WeakAssign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+WeakAssign.swift"; sourceTree = "<group>"; };
 		6484BB6F2C1A9F1F00B1D158 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -102,6 +148,7 @@
 		645187812C0EAA0C0033A50B /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				647481482C4B605C0034CB8A /* Base */,
 				6484BB752C1AA1C900B1D158 /* Components */,
 				64E09DEE2C09C4D600D763D9 /* ContentView.swift */,
 				64E09DFF2C09C57B00D763D9 /* LoginView.swift */,
@@ -130,6 +177,10 @@
 			children = (
 				64E09DEC2C09C4D600D763D9 /* UISampleApp.swift */,
 				643C326A2C18068200B60246 /* AppDelegate.swift */,
+				6474811D2C4565640034CB8A /* AppEnvironment.swift */,
+				647481302C4B44AA0034CB8A /* DeepLinksHandler.swift */,
+				647481312C4B44AA0034CB8A /* PushNotificationsHandler.swift */,
+				647481322C4B44AA0034CB8A /* SystemEventsHandler.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -138,6 +189,10 @@
 			isa = PBXGroup;
 			children = (
 				646706AD2C31220F008DB9E3 /* Item.swift */,
+				6474811F2C4567180034CB8A /* UserModel.swift */,
+				647481212C45676D0034CB8A /* TokenModel.swift */,
+				647481442C4B51EC0034CB8A /* LessonMO.swift */,
+				647481462C4B5BC20034CB8A /* Lesson.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -147,6 +202,8 @@
 			children = (
 				6492D4492C1B2E960050F7E7 /* MultipartFormCreator.swift */,
 				6484BB7B2C1AD17F00B1D158 /* WebRepository.swift */,
+				647481232C4B35450034CB8A /* LoginRepository.swift */,
+				647481362C4B4BC40034CB8A /* LessonDBRepository.swift */,
 				646706B52C312B4A008DB9E3 /* Item */,
 			);
 			path = Repository;
@@ -180,9 +237,40 @@
 		646706B92C312E20008DB9E3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6474812C2C4B3FA00034CB8A /* UserPermissionsService.swift */,
 				646706BA2C312E42008DB9E3 /* ItemService.swift */,
+				6474811B2C455F3A0034CB8A /* LoginService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		647481252C4B3DF90034CB8A /* Injected */ = {
+			isa = PBXGroup;
+			children = (
+				647481262C4B3EAA0034CB8A /* DIContainer.swift */,
+				6474812A2C4B3EF20034CB8A /* AppState.swift */,
+				6474812E2C4B3FC70034CB8A /* ServicesContainer.swift */,
+			);
+			path = Injected;
+			sourceTree = "<group>";
+		};
+		647481382C4B4BFD0034CB8A /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				647481392C4B4C2A0034CB8A /* CoreDataStack.swift */,
+				647481412C4B4C8E0034CB8A /* CoreDataHelpers.swift */,
+				6474813F2C4B4C8E0034CB8A /* db_model_v1.xcdatamodeld */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		647481482C4B605C0034CB8A /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				647481492C4B606A0034CB8A /* BaseViewModel.swift */,
+				6474814B2C4B60DB0034CB8A /* BaseView.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		6484BB752C1AA1C900B1D158 /* Components */ = {
@@ -222,6 +310,8 @@
 		64E09DEB2C09C4D600D763D9 /* UISample */ = {
 			isa = PBXGroup;
 			children = (
+				647481382C4B4BFD0034CB8A /* Persistence */,
+				647481252C4B3DF90034CB8A /* Injected */,
 				64EFDFD92C0FF56900EBA864 /* Utilities */,
 				6484BB782C1AD0BA00B1D158 /* Network */,
 				646706AC2C3121FF008DB9E3 /* Models */,
@@ -250,6 +340,9 @@
 		64EFDFD92C0FF56900EBA864 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6474813B2C4B4C3F0034CB8A /* Helpers.swift */,
+				6474813C2C4B4C3F0034CB8A /* LazyList.swift */,
+				647481282C4B3ED90034CB8A /* Store.swift */,
 				6492D4472C1B2DC40050F7E7 /* Loadable.swift */,
 				64EFDFDA2C0FF57600EBA864 /* CancelBag.swift */,
 				6484BB6B2C1A7DC600B1D158 /* CellConfigurator.swift */,
@@ -329,36 +422,59 @@
 			buildActionMask = 2147483647;
 			files = (
 				64E09DF62C09C4D800D763D9 /* Persistence.swift in Sources */,
+				6474813A2C4B4C2A0034CB8A /* CoreDataStack.swift in Sources */,
 				646706B32C3129FF008DB9E3 /* ItemAPI.swift in Sources */,
 				6484BB7C2C1AD17F00B1D158 /* WebRepository.swift in Sources */,
 				6492D44C2C1B37B30050F7E7 /* ItemRepository.swift in Sources */,
 				6492DDAB2C1937D50054FE06 /* Routable.swift in Sources */,
 				646706AE2C31220F008DB9E3 /* Item.swift in Sources */,
+				647481472C4B5BC20034CB8A /* Lesson.swift in Sources */,
 				643C32662C17E17C00B60246 /* MainView.swift in Sources */,
 				646706B02C31249B008DB9E3 /* Request.swift in Sources */,
+				647481202C4567180034CB8A /* UserModel.swift in Sources */,
+				6474812F2C4B3FC70034CB8A /* ServicesContainer.swift in Sources */,
+				647481332C4B44AA0034CB8A /* DeepLinksHandler.swift in Sources */,
 				64E09DF92C09C4D800D763D9 /* UISample.xcdatamodeld in Sources */,
 				6492D4462C1B2D970050F7E7 /* NetworkingHelpers.swift in Sources */,
+				647481272C4B3EAA0034CB8A /* DIContainer.swift in Sources */,
 				6484BB6C2C1A7DC600B1D158 /* CellConfigurator.swift in Sources */,
 				6492DDA92C1934A80054FE06 /* SubSheetView.swift in Sources */,
 				64E09DEF2C09C4D600D763D9 /* ContentView.swift in Sources */,
 				6492D4482C1B2DC40050F7E7 /* Loadable.swift in Sources */,
 				6492DDAD2C194B7D0054FE06 /* SettingView.swift in Sources */,
+				647481432C4B4C8E0034CB8A /* CoreDataHelpers.swift in Sources */,
 				643C32692C17E1AE00B60246 /* Router.swift in Sources */,
+				6474813E2C4B4C3F0034CB8A /* LazyList.swift in Sources */,
+				647481242C4B35450034CB8A /* LoginRepository.swift in Sources */,
+				6474812D2C4B3FA00034CB8A /* UserPermissionsService.swift in Sources */,
 				6492DDA72C19347C0054FE06 /* PresentingView.swift in Sources */,
+				6474813D2C4B4C3F0034CB8A /* Helpers.swift in Sources */,
 				6484BB702C1A9F1F00B1D158 /* ProfileView.swift in Sources */,
 				646706BB2C312E42008DB9E3 /* ItemService.swift in Sources */,
+				6474814A2C4B606A0034CB8A /* BaseViewModel.swift in Sources */,
 				6492D44A2C1B2E960050F7E7 /* MultipartFormCreator.swift in Sources */,
 				6492DDA52C1934660054FE06 /* SheetView.swift in Sources */,
+				6474814C2C4B60DB0034CB8A /* BaseView.swift in Sources */,
 				64E09E002C09C57B00D763D9 /* LoginView.swift in Sources */,
+				647481372C4B4BC40034CB8A /* LessonDBRepository.swift in Sources */,
+				647481422C4B4C8E0034CB8A /* db_model_v1.xcdatamodeld in Sources */,
+				647481222C45676D0034CB8A /* TokenModel.swift in Sources */,
 				64E09DED2C09C4D600D763D9 /* UISampleApp.swift in Sources */,
+				6474811C2C455F3A0034CB8A /* LoginService.swift in Sources */,
 				6484BB7A2C1AD0C600B1D158 /* APICall.swift in Sources */,
+				647481352C4B44AA0034CB8A /* SystemEventsHandler.swift in Sources */,
 				6484BB722C1AA0DD00B1D158 /* ProfileEditView.swift in Sources */,
+				647481452C4B51EC0034CB8A /* LessonMO.swift in Sources */,
 				6484BB6E2C1A861B00B1D158 /* Publisher+WeakAssign.swift in Sources */,
+				647481342C4B44AA0034CB8A /* PushNotificationsHandler.swift in Sources */,
 				64EFDFDB2C0FF57600EBA864 /* CancelBag.swift in Sources */,
 				6484BB742C1AA0E600B1D158 /* ProfileDetailView.swift in Sources */,
+				647481292C4B3ED90034CB8A /* Store.swift in Sources */,
 				6484BB772C1AA1D300B1D158 /* CloseButton.swift in Sources */,
 				643C326B2C18068200B60246 /* AppDelegate.swift in Sources */,
+				6474812B2C4B3EF20034CB8A /* AppState.swift in Sources */,
 				64F8CD4D2C0D6C2700943395 /* Test.swift in Sources */,
+				6474811E2C4565640034CB8A /* AppEnvironment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +684,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		6474813F2C4B4C8E0034CB8A /* db_model_v1.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				647481402C4B4C8E0034CB8A /* db_model_v1.xcdatamodel */,
+			);
+			currentVersion = 647481402C4B4C8E0034CB8A /* db_model_v1.xcdatamodel */;
+			name = db_model_v1.xcdatamodeld;
+			path = "/Users/jeong-yeongmin/Work/Projects/SwiftUI/SwiftUISamples/UISample/Persistence/db_model_v1.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		64E09DF72C09C4D800D763D9 /* UISample.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

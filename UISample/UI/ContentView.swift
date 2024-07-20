@@ -21,7 +21,7 @@ extension ContentView {
         case .detail(let text):
             ItemDetailView(timestamp: text)
         case .login:
-            LoginView()
+            LoginView(viewModel: .init(container: viewModel.container))
                 .environmentObject(navRouter)
         }
     }
@@ -29,6 +29,7 @@ extension ContentView {
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    let viewModel: ViewModdel
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \ItemDM.timestamp, ascending: true)],
@@ -155,10 +156,7 @@ private let itemFormatter: DateFormatter = {
 }()
 
 extension ContentView {
-    class ViewModdel: ObservableObject {
-        @Published var isLoginActive: Bool = false
-        @Published var isDetailActive: Bool = false
-        
+    class ViewModdel: BaseViewModel {
         
     }
 }
@@ -173,5 +171,5 @@ struct ItemDetailView: View {
 }
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView(viewModel: ContentView.ViewModdel(container: .preview)).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

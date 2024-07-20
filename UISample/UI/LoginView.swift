@@ -27,6 +27,8 @@ struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var navRouter: NavigationRouter
     
+    let viewModel: ViewModdel
+    
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var geometrySize: CGSize = .zero
@@ -85,7 +87,8 @@ struct LoginView: View {
         Button(action: {
             print("Username: \(username), Password: \(password)")
             username = Bool.random() ? "test" : ""
-            navRouter.push(route: Route.main)
+            viewModel.login(username: username, password: password)
+            //navRouter.push(route: Route.main)
         }) {
             Text("Login")
                 .frame(maxWidth: .infinity)
@@ -137,7 +140,37 @@ struct LoginView: View {
     }
 }
 
+extension LoginView {
+    class ViewModdel: BaseViewModel {
+        @Published var isLogined: Bool = false
+        var navRouter: NavigationRouter?
+        
+        init(container: DIContainer, navRouter: NavigationRouter? = nil) {
+            super.init(container: container)
+            
+            self.navRouter = navRouter
+            
+            let appState = container.appState
+            appState.map(\.userData.isLogined)
+                .removeDuplicates()
+                .weakAssign(to: \.isLogined, on: self)
+                .store(in: cancelBag)
+        }
+        
+        func login(username: String, password: String) {
+            container.services.loginService.login(username: username, password: password)
+                .sinkToResult { result in
+                    if case .success(let model) = result {
+                        let token = model.access_token
+                        self.container.appState[\.userData.token] = token
+                        self.navRouter?.push(route: Route.main)
+                    }
+                }.store(in: cancelBag)
+        }
+    }
+}
+
 
 #Preview {
-    LoginView()
+    LoginView(viewModel: .init(container: .preview))
 }

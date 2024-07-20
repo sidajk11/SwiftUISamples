@@ -2,9 +2,8 @@
 //  CancelBag.swift
 //  UISample
 //
-//  Created by 정영민 on 2024/06/05.
+//  Created by 정영민 on 2024/06/13.
 //
-
 import Combine
 
 final class CancelBag {
@@ -41,4 +40,3 @@ extension AnyCancellable {
         cancelBag.subscriptions.insert(self)
     }
 }
-

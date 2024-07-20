@@ -18,12 +18,3 @@ extension Publisher where Failure == Never {
         }
     }
 }
-
-func weakAssign<Object: AnyObject, Value>(
-    for object: Object,
-    keyPath: ReferenceWritableKeyPath<Object, Value>
-) -> (Value) -> Void {
-    return { [weak object] value in
-        object?[keyPath: keyPath] = value
-    }
-}
