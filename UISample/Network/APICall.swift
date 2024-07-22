@@ -75,7 +75,9 @@ extension APICall {
         var request = URLRequest(url: url)
         request.httpMethod = method
         request.allHTTPHeaderFields = headers
-        if let body = self.bodyObject, let bodyData = try? JSONEncoder().encode(body) {
+        if let body = bodyObject, let bodyData = try? JSONEncoder().encode(body) {
+            request.httpBody = bodyData
+        } else if bodyDict.count > 0, let bodyData = bodyDict.toJsonData() {
             request.httpBody = bodyData
         }
         else if formData.count > 0 {

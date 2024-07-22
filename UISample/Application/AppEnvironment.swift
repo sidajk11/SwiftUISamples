@@ -62,7 +62,7 @@ extension AppEnvironment {
     private static func configuredWebRepositories(session: URLSession) -> DIContainer.WebRepositories {
         let loginWebRepository = RealLoginWebRepository(
             session: session,
-            baseURL: "https://restcountries.com/v2")
+            baseURL: "http://127.0.0.1:8000")
         return .init(loginWebRepository: loginWebRepository)
     }
     

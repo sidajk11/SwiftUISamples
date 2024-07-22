@@ -86,7 +86,7 @@ struct LoginView: View {
     var loginButton: some View {
         Button(action: {
             print("Username: \(username), Password: \(password)")
-            username = Bool.random() ? "test" : ""
+            //username = Bool.random() ? "test" : ""
             viewModel.login(username: username, password: password)
             //navRouter.push(route: Route.main)
         }) {
@@ -110,6 +110,7 @@ struct LoginView: View {
             .background(Color(.systemGray6))
             .cornerRadius(10)
             .padding(.horizontal)
+            .textInputAutocapitalization(.never)
             .id(Field.password)
     }
     
@@ -120,6 +121,7 @@ struct LoginView: View {
             .background(Color(.systemGray6))
             .cornerRadius(10)
             .padding(.horizontal)
+            .textInputAutocapitalization(.never)
             .id(Field.username)
     }
     

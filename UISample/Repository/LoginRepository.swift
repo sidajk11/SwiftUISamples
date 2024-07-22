@@ -58,4 +58,15 @@ extension RealLoginWebRepository.API: APICall {
             return ""
         }
     }
+    
+    var bodyDict: [String : Any] {
+        switch self {
+        case .signUp:
+            return [:]
+        case .login(let username, let password):
+            return ["username" : username, "password" : password]
+        default:
+            return [:]
+        }
+    }
 }
