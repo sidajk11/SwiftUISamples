@@ -16,8 +16,7 @@ extension LoginView {
     @ViewBuilder func routing(for route: Route) -> some View {
         switch route {
         case .main:
-            MainView()
-                .environmentObject(navRouter)
+            MainView(viewModel: .init(baseViewModel: viewModel))
         }
     }
 }
@@ -25,7 +24,6 @@ extension LoginView {
 
 struct LoginView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var navRouter: NavigationRouter
     
     let viewModel: ViewModdel
     
@@ -65,6 +63,9 @@ struct LoginView: View {
                 }
             }
         }
+        .navigationDestination(for: Route.self) { route in
+            routing(for: route)
+        }
     }
     
     var content: some View {
@@ -97,9 +98,6 @@ struct LoginView: View {
                 .foregroundColor(.white)
                 .cornerRadius(10)
                 .padding(.horizontal)
-        }
-        .navigationDestination(for: Route.self) { route in
-            routing(for: route)
         }
     }
     
@@ -145,12 +143,9 @@ struct LoginView: View {
 extension LoginView {
     class ViewModdel: BaseViewModel {
         @Published var isLogined: Bool = false
-        var navRouter: NavigationRouter?
         
-        init(container: DIContainer, navRouter: NavigationRouter? = nil) {
-            super.init(container: container)
-            
-            self.navRouter = navRouter
+        required init(container: DIContainer, navRouter: NavigationRouter? = nil) {
+            super.init(container: container, navRouter: navRouter)
             
             let appState = container.appState
             appState.map(\.userData.isLogined)
@@ -164,8 +159,9 @@ extension LoginView {
                 .sinkToResult { result in
                     if case .success(let model) = result {
                         let token = model.access_token
+                        //self.container.appState.value.userData.token = token  -> Won't report event
                         self.container.appState[\.userData.token] = token
-                        self.navRouter?.push(route: Route.main)
+                        self.navRouter.push(route: Route.main)
                     }
                 }.store(in: cancelBag)
         }

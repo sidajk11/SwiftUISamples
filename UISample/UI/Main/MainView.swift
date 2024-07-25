@@ -26,7 +26,6 @@ extension MainView {
             PresentingView()
         case .setting:
             SettingView()
-                .environmentObject(navRouter)
         case .profile:
             ProfileView()
             
@@ -36,7 +35,8 @@ extension MainView {
 
 struct MainView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var navRouter: NavigationRouter
+    
+    let viewModel: ViewModdel
     
     @ObservedObject var presentRouter = PresentRouter<Route>()
     
@@ -67,7 +67,7 @@ struct MainView: View {
             }
             
             Button("Show Setting") {
-                navRouter.push(route: Route.setting)
+                viewModel.navRouter.push(route: Route.setting)
             }
             
             Button("Show Profile") {
@@ -89,7 +89,7 @@ struct MainView: View {
         HStack() {
             Button(action: {
                 //presentationMode.wrappedValue.dismiss()
-                navRouter.popup(2)
+                viewModel.navRouter.popup(2)
             }) {
                 Image(systemName: "xmark")
                     .foregroundColor(.white)
@@ -103,6 +103,14 @@ struct MainView: View {
     }
 }
 
+extension MainView {
+    class ViewModdel: BaseViewModel {
+        required init(container: DIContainer, navRouter: NavigationRouter? = nil) {
+            super.init(container: container, navRouter: navRouter)
+        }
+    }
+}
+
 #Preview {
-    MainView()
+    MainView(viewModel: .preview)
 }

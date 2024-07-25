@@ -21,7 +21,7 @@ extension ContentView {
         case .detail(let text):
             ItemDetailView(timestamp: text)
         case .login:
-            LoginView(viewModel: .init(container: viewModel.container))
+            LoginView(viewModel: .init(container: viewModel.container, navRouter: navRouter))
                 .environmentObject(navRouter)
         }
     }

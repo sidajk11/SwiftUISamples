@@ -15,7 +15,7 @@ struct UISampleApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: .init(container: appDelegate.environment.container))
+            IntroView(viewModel: .init(container: appDelegate.environment.container))
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
