@@ -12,6 +12,7 @@
 		643C32662C17E17C00B60246 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32652C17E17C00B60246 /* MainView.swift */; };
 		643C32692C17E1AE00B60246 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32682C17E1AE00B60246 /* Router.swift */; };
 		643C326B2C18068200B60246 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C326A2C18068200B60246 /* AppDelegate.swift */; };
+		645B762F2C53903C0052647B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645B762E2C53903C0052647B /* TestView.swift */; };
 		646706AE2C31220F008DB9E3 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646706AD2C31220F008DB9E3 /* Item.swift */; };
 		646706B02C31249B008DB9E3 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646706AF2C31249B008DB9E3 /* Request.swift */; };
 		646706B32C3129FF008DB9E3 /* ItemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646706B22C3129FF008DB9E3 /* ItemAPI.swift */; };
@@ -73,6 +74,7 @@
 		643C32652C17E17C00B60246 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		643C32682C17E1AE00B60246 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		643C326A2C18068200B60246 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		645B762E2C53903C0052647B /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		646706AD2C31220F008DB9E3 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		646706AF2C31249B008DB9E3 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		646706B22C3129FF008DB9E3 /* ItemAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAPI.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				643C32652C17E17C00B60246 /* MainView.swift */,
+				645B762E2C53903C0052647B /* TestView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				6474812F2C4B3FC70034CB8A /* ServicesContainer.swift in Sources */,
 				647481332C4B44AA0034CB8A /* DeepLinksHandler.swift in Sources */,
 				64E09DF92C09C4D800D763D9 /* UISample.xcdatamodeld in Sources */,
+				645B762F2C53903C0052647B /* TestView.swift in Sources */,
 				6492D4462C1B2D970050F7E7 /* NetworkingHelpers.swift in Sources */,
 				647481272C4B3EAA0034CB8A /* DIContainer.swift in Sources */,
 				6484BB6C2C1A7DC600B1D158 /* CellConfigurator.swift in Sources */,
