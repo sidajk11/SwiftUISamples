@@ -28,7 +28,6 @@ extension MainView {
             SettingView()
         case .profile:
             ProfileView()
-            
         }
     }
 }
@@ -36,7 +35,7 @@ extension MainView {
 struct MainView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    let viewModel: ViewModdel
+    let viewModel: ViewModel
     
     @ObservedObject var presentRouter = PresentRouter<Route>()
     
@@ -44,67 +43,69 @@ struct MainView: View {
     @State private var showingSubSheet = false
     @State private var presentingFullScreenCover = false
     
+    @State private var selectedTab = 0
+    
     var body: some View {
-        content
-    }
-    
-    var content: some View {
-        VStack {
-            Text("Hello, World!")
-            
-            closeButton
-            
-            Button("Show Turm") {
-                presentRouter.sheet(route: .term)
-            }
-            
-            Button("Show Privacy") {
-                presentRouter.sheet(route: .privacy(message: "this is message"))
-            }
-            
-            Button("Show PresentingView") {
-                presentRouter.fullScreenCover(route: .full)
-            }
-            
-            Button("Show Setting") {
-                viewModel.navRouter.push(route: Route.setting)
-            }
-            
-            Button("Show Profile") {
-                presentRouter.fullScreenCover(route: .profile)
-            }
+        TabView(selection: $selectedTab) {
+            HomeView(viewModel: .init(baseViewModel: viewModel))
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+                .tag(0)
+
+            SettingView()
+                .tabItem {
+                    Label("Progress", systemImage: "chart.bar.fill")
+                }
+                .tag(1)
+
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.crop.circle")
+                }
+                .tag(2)
         }
-        .sheet(item: $presentRouter.sheet, content: { route in
-            routing(route: route)
-        })
-        .fullScreenCover(item: $presentRouter.fullScreen) { route in
-            routing(route: route)
-        }
-        .navigationDestination(for: Route.self) { route in
-            routing(route: route)
-        }
-    }
-    
-    var closeButton: some View {
-        HStack() {
+        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    
+        // Custom Tab Bar
+        HStack {
             Button(action: {
-                //presentationMode.wrappedValue.dismiss()
-                viewModel.navRouter.popup(2)
+                selectedTab = 0
             }) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.gray.opacity(0.6))
-                    .clipShape(Circle())
+                VStack {
+                    Image(systemName: "house")
+                    Text("Home")
+                }
             }
-            .padding()
-            Spacer()
+            .frame(maxWidth: .infinity)
+            
+            Button(action: {
+                selectedTab = 1
+            }) {
+                VStack {
+                    Image(systemName: "gear")
+                    Text("Settings")
+                }
+            }
+            .frame(maxWidth: .infinity)
+            
+            Button(action: {
+                selectedTab = 2
+            }) {
+                VStack {
+                    Image(systemName: "person.crop.circle")
+                    Text("Profile")
+                }
+            }
+            .frame(maxWidth: .infinity)
         }
+        .padding()
+        .background(Color(UIColor.systemBackground).shadow(radius: 2))
     }
 }
 
 extension MainView {
-    class ViewModdel: BaseViewModel {
+    class ViewModel: BaseViewModel {
         required init(container: DIContainer, navRouter: NavigationRouter? = nil) {
             super.init(container: container, navRouter: navRouter)
         }

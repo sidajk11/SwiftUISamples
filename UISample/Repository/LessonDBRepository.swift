@@ -9,18 +9,18 @@ import CoreData
 import Combine
 
 protocol LessonDBRepository {
-    func countries(lessonNoList: [Int]) -> AnyPublisher<LazyList<Lesson>, Error>
+    func countries(lessonNoList: [Int]) -> AnyPublisher<LazyList<LessonModel>, Error>
 }
 
 struct RealLessonDBRepository: LessonDBRepository {
     
     let persistentStore: PersistentStore
     
-    func countries(lessonNoList: [Int]) -> AnyPublisher<LazyList<Lesson>, Error> {
+    func countries(lessonNoList: [Int]) -> AnyPublisher<LazyList<LessonModel>, Error> {
         let fetchRequest = LessonMO.lessons(lessonNoList: lessonNoList)
         return persistentStore
             .fetch(fetchRequest) {
-                Lesson(managedObject: $0)
+                LessonModel(managedObject: $0)
             }
             .eraseToAnyPublisher()
     }

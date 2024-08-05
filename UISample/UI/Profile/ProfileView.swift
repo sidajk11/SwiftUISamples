@@ -24,6 +24,8 @@ extension ProfileView {
 }
 
 struct ProfileView: View {
+    @EnvironmentObject private var appRootManager: AppRootManager
+    
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var navRouter = NavigationRouter()
     
@@ -39,7 +41,8 @@ struct ProfileView: View {
     var content: some View {
         VStack {
             CloseButton {
-                presentationMode.wrappedValue.dismiss()
+                //presentationMode.wrappedValue.dismiss()
+                appRootManager.currentRoot = .intro
             }
             
             Button("Show Edit") {

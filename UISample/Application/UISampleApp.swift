@@ -12,11 +12,21 @@ struct UISampleApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     let persistenceController = PersistenceController.shared
+    
+    @StateObject private var appRootManager = AppRootManager()
 
     var body: some Scene {
         WindowGroup {
-            IntroView(viewModel: .init(container: appDelegate.environment.container))
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            Group {
+                switch appRootManager.currentRoot {
+                case .intro:
+                    IntroView(viewModel: .init(container: appDelegate.environment.container))
+                case .main:
+                    MainView(viewModel: .init(container: appDelegate.environment.container))
+                }
+            }
+            .environmentObject(appRootManager)
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

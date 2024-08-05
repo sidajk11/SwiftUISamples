@@ -26,38 +26,26 @@ extension IntroView {
 
 
 struct IntroView: View {
+    @EnvironmentObject private var appRootManager: AppRootManager
+    
     @Environment(\.presentationMode) var presentationMode
     
-    let viewModel: ViewModel
-    
+    @ObservedObject var viewModel: ViewModel
     @State private var geometrySize: CGSize = .zero
     
     var body: some View {
         
-        GeometryReader { geometry in
-            ScrollView {
-                ScrollViewReader { proxy in
-                    content
-                        .gesture(
-                            TapGesture()
-                                .onEnded { _ in
-                                    UIApplication.shared.endEditing()
-                                }
-                        )
-                        .onAppear {
-                            self.geometrySize = geometry.size
-                            self.viewModel.onAppear()
-                        }
-                }
+        content
+            .onAppear {
+                self.viewModel.onAppear()
             }
-        }
-        .navigationDestination(for: Route.self) { route in
-            routing(for: route)
-        }
     }
     
     var content: some View {
         VStack(spacing: 20) {
+            Button("Show Main") {
+                appRootManager.currentRoot = .main
+            }
         }
         .padding()
     }
@@ -70,9 +58,6 @@ extension IntroView {
         }
         
         func onAppear() {
-            if isLogined {
-                self.navRouter.push(route: Route.main)
-            }
         }
     }
 }

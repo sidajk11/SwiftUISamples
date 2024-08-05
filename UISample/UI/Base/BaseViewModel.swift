@@ -5,12 +5,12 @@
 //  Created by 정영민 on 7/20/24.
 //
 
-import Foundation
+import SwiftUI
 import Combine
 
 class BaseViewModel: ObservableObject {
     let container: DIContainer
-    var navRouter = NavigationRouter()
+    @Published var navRouter = NavigationRouter()
     let cancelBag = CancelBag()
     
     static var preview: Self {

@@ -28,7 +28,6 @@ extension TestView {
             SettingView()
         case .profile:
             ProfileView()
-            
         }
     }
 }
