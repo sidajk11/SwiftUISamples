@@ -21,7 +21,7 @@ extension ContentView {
         case .detail(let text):
             ItemDetailView(timestamp: text)
         case .login:
-            LoginView(viewModel: .init(container: viewModel.container, navRouter: navRouter))
+            LoginView(viewModel: .init(container: viewModel.container))
                 .environmentObject(navRouter)
         }
     }
@@ -29,6 +29,7 @@ extension ContentView {
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
     let viewModel: ViewModdel
 
     @FetchRequest(

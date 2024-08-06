@@ -106,8 +106,8 @@ struct MainView: View {
 
 extension MainView {
     class ViewModel: BaseViewModel {
-        required init(container: DIContainer, navRouter: NavigationRouter? = nil) {
-            super.init(container: container, navRouter: navRouter)
+        required init(container: DIContainer) {
+            super.init(container: container)
         }
     }
 }

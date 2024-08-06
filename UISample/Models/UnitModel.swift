@@ -16,3 +16,17 @@ struct UnitModel: Codable, Identifiable {
     let desc: String
     let imageUrl: String
 }
+
+extension UnitModel {
+    init?(managedObject: UnitMO) {
+        guard let unitId = managedObject.unitId,
+              let title = managedObject.title,
+              let desc = managedObject.desc
+        else {
+            return nil
+        }
+        let levelNo = managedObject.levelNo
+        let unitNo = managedObject.unitNo
+        self.init(id: unitId, levelNo: Int(levelNo), unitNo: Int(unitNo), title: title, desc: desc, imageUrl: "")
+    }
+}

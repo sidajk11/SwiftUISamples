@@ -10,21 +10,17 @@ import Combine
 
 class BaseViewModel: ObservableObject {
     let container: DIContainer
-    @Published var navRouter = NavigationRouter()
     let cancelBag = CancelBag()
     
     static var preview: Self {
         .init(container: .preview)
     }
     
-    required init(container: DIContainer, navRouter: NavigationRouter? = nil) {
+    required init(container: DIContainer) {
         self.container = container
-        if let navRouter = navRouter {
-            self.navRouter = navRouter
-        }
     }
     
     convenience init(baseViewModel: BaseViewModel) {
-        self.init(container: baseViewModel.container, navRouter: baseViewModel.navRouter)
+        self.init(container: baseViewModel.container)
     }
 }

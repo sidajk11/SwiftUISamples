@@ -41,8 +41,11 @@ struct ProfileView: View {
     var content: some View {
         VStack {
             CloseButton {
-                //presentationMode.wrappedValue.dismiss()
-                appRootManager.currentRoot = .intro
+                if presentationMode.wrappedValue.isPresented {
+                    presentationMode.wrappedValue.dismiss()
+                } else {
+                    appRootManager.currentRoot = .intro
+                }
             }
             
             Button("Show Edit") {

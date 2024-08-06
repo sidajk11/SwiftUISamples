@@ -13,22 +13,27 @@ extension HomeView {
         case privacy(message: String)
         case full
         case setting
-        case profile
+        case practice(cellVM: LessonCell.ViewModel)
     }
     
     @ViewBuilder private func routing(route: Route) -> some View {
-        switch route {
-        case .term:
-            SheetView()
-        case .privacy(let message):
-            SubSheetView(text: message)
-        case .full:
-            PresentingView()
-        case .setting:
-            SettingView()
-        case .profile:
-            ProfileView()
+        NavigationStack(path: $navRouter.path) {
+            switch route {
+            case .term:
+                SheetView()
+            case .privacy(let message):
+                SubSheetView(text: message)
+            case .full:
+                PresentingView()
+            case .setting:
+                SettingView()
+            case .practice(let cellVM):
+                if let lessonModel = cellVM.lessonModel {
+                    PracticeView(viewModel: PracticeView.ViewModel.viewModel(container: viewModel.container, lessonModel: lessonModel))
+                }
+            }
         }
+        .environmentObject(navRouter)
     }
 }
 
@@ -37,11 +42,12 @@ struct HomeView: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    @ObservedObject var presentRouter = PresentRouter<Route>()
-    
     @State private var showingMainSheet = false
     @State private var showingSubSheet = false
     @State private var presentingFullScreenCover = false
+    
+    @StateObject var navRouter = NavigationRouter()
+    @StateObject var presentRouter = PresentRouter<Route>()
     
     var body: some View {
         content
@@ -52,40 +58,31 @@ struct HomeView: View {
     
     var content: some View {
         VStack {
-            List {
+            List(selection: $viewModel.selectedLesson) {
                 ForEach(viewModel.units) { unitModel in
                     Section(header: Text(unitModel.title)) {
-                        ForEach(viewModel.lessons(unitNo: unitModel.unitNo)) { lessonModel in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(lessonModel.title)
-                                        .font(.headline)
-                                    Text(lessonModel.desc)
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                            }
+                        ForEach(viewModel.lessons(unitNo: unitModel.unitNo)) { cellVM in
+                            LessonCell(viewModel: cellVM)
                         }
                     }
                 }
             }
+            .onChange(of: viewModel.selectedLesson, perform: { newValue in
+                guard let model = viewModel.lesson(by: newValue) else { return }
+                presentRouter.fullScreenCover(route: Route.practice(cellVM: model))
+            })
+//            if #available(iOS 17.0, *) {
+//                onChange(of: viewModel.selectedLesson) { _, _ in
+//                    presentRouter.fullScreenCover(route: Route.profile)
+//                }
+//            } else {
+//                onChange(of: viewModel.selectedLesson, perform: { newValue in
+//                    presentRouter.fullScreenCover(route: Route.profile)
+//                })
+//            }
         }
-    }
-    
-    var closeButton: some View {
-        HStack() {
-            Button(action: {
-                //presentationMode.wrappedValue.dismiss()
-                viewModel.navRouter.popup(2)
-            }) {
-                Image(systemName: "xmark")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Color.gray.opacity(0.6))
-                    .clipShape(Circle())
-            }
-            .padding()
-            Spacer()
+        .fullScreenCover(item: $presentRouter.fullScreen) { route in
+            routing(route: route)
         }
     }
 }
@@ -95,18 +92,28 @@ extension HomeView {
         
         @Published var units: [UnitModel] = []
         
-        var lessonsDict: [Int : [LessonModel]] = [:]
+        var lessonsDict: [Int : [LessonCell.ViewModel]] = [:]
         
-        required init(container: DIContainer, navRouter: NavigationRouter? = nil) {
-            super.init(container: container, navRouter: navRouter)
-        }
+        @Published var selectedLesson: LessonCell.ViewModel.ID?
         
-        func lessons(unitNo: Int) -> [LessonModel] {
+        func lessons(unitNo: Int) -> [LessonCell.ViewModel] {
             return lessonsDict[unitNo] ?? []
         }
         
         func fetch() {
             loadTest()
+        }
+        
+        func lesson(by id: LessonCell.ViewModel.ID?) -> LessonCell.ViewModel? {
+            for unit in units {
+                let lessons = lessonsDict[unit.unitNo] ?? []
+                for lesson in lessons {
+                    if lesson.id == id {
+                        return lesson
+                    }
+                }
+            }
+            return nil
         }
         
         private func loadTest() {
@@ -117,8 +124,15 @@ extension HomeView {
                 let unitModel = UnitModel(id: uuid, levelNo: 1, unitNo: unitNo, title: "Unit \(unitNo)", desc: "desc", imageUrl: "")
                 list.append(unitModel)
                 
+                var cellVMList: [LessonCell.ViewModel] = []
                 let lessons = loadLessonsTest(unitNo: unitNo)
-                lessonsDict[unitNo] = lessons
+                for lesson in lessons {
+                    let cellVM = LessonCell.ViewModel(baseViewModel: self)
+                    cellVM.load(model: lesson)
+                    cellVMList.append(cellVM)
+                }
+                
+                lessonsDict[unitNo] = cellVMList
             }
             units = list
         }

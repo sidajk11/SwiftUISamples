@@ -40,52 +40,52 @@ struct PracticeView: View {
     
     var body: some View {
         
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(viewModel.items, id: \.self) { item in
-                    Text(item)
-                        .frame(width: 100, height: 100)
-                        .background(Color.blue)
-                        .cornerRadius(10)
-                        .foregroundColor(.white)
+        content
+            .navigationTitle("Practice")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.left") // Custom back button icon
+                            Text("Back") // Custom back button text
+                        }
+                    }
                 }
             }
-            .padding()
+    }
+    
+    var content: some View {
+        ScrollView {
+            VStack {
+                Text(viewModel.title)
+            }
         }
         .navigationDestination(for: Route.self) { route in
             routing(for: route)
         }
-    }
-    
-    var content: some View {
-        VStack(spacing: 20) {
-        }
-        .padding()
     }
 }
 
 extension PracticeView {
     class ViewModel: BaseViewModel {
         
-        var columns: [String] = []
-        var items: [String] = []
+        var lessonModel: LessonModel!
         
-        private var isLogined: Bool {
-            return container.appState.value.userData.isLogined
-        }
+        @Published var title: String = ""
         
         func onAppear() {
-            if isLogined {
-                self.navRouter.push(route: Route.main)
-            }
             
-            for i in 0 ..< 20 {
-                columns.append("\(i)")
-            }
+        }
+        
+        static func viewModel(container: DIContainer, lessonModel: LessonModel) -> ViewModel {
+            let vm = ViewModel(container: container)
+            vm.lessonModel = lessonModel
             
-            for i in 0 ..< 10 {
-                items.append("item \(i)")
-            }
+            vm.title = lessonModel.title
+            
+            return vm
         }
     }
 }

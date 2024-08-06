@@ -59,6 +59,12 @@ struct LoginView: View {
                         )
                         .onAppear {
                             self.geometrySize = geometry.size
+                            viewModel.$isLogined
+                                .receive(on: RunLoop.main)
+                                .sink { _ in
+                                    
+                                }
+                                .store(in: viewModel.cancelBag)
                         }
                 }
             }
@@ -144,8 +150,8 @@ extension LoginView {
     class ViewModdel: BaseViewModel {
         @Published var isLogined: Bool = false
         
-        required init(container: DIContainer, navRouter: NavigationRouter? = nil) {
-            super.init(container: container, navRouter: navRouter)
+        required init(container: DIContainer) {
+            super.init(container: container)
             
             let appState = container.appState
             appState.map(\.userData.isLogined)
@@ -161,7 +167,7 @@ extension LoginView {
                         let token = model.access_token
                         //self.container.appState.value.userData.token = token  -> Won't report event
                         self.container.appState[\.userData.token] = token
-                        self.navRouter.push(route: Route.main)
+                        self.isLogined = true
                     }
                 }.store(in: cancelBag)
         }

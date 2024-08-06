@@ -37,7 +37,8 @@ struct TestView: View {
     
     let viewModel: ViewModdel
     
-    @ObservedObject var presentRouter = PresentRouter<Route>()
+    @EnvironmentObject private var navRouter: NavigationRouter
+    @StateObject var presentRouter = PresentRouter<Route>()
     
     @State private var showingMainSheet = false
     @State private var showingSubSheet = false
@@ -66,7 +67,7 @@ struct TestView: View {
             }
             
             Button("Show Setting") {
-                viewModel.navRouter.push(route: Route.setting)
+                navRouter.push(route: Route.setting)
             }
             
             Button("Show Profile") {
@@ -88,7 +89,7 @@ struct TestView: View {
         HStack() {
             Button(action: {
                 //presentationMode.wrappedValue.dismiss()
-                viewModel.navRouter.popup(2)
+                navRouter.popup(2)
             }) {
                 Image(systemName: "xmark")
                     .foregroundColor(.white)
@@ -104,8 +105,8 @@ struct TestView: View {
 
 extension TestView {
     class ViewModdel: BaseViewModel {
-        required init(container: DIContainer, navRouter: NavigationRouter? = nil) {
-            super.init(container: container, navRouter: navRouter)
+        required init(container: DIContainer) {
+            super.init(container: container)
         }
     }
 }
