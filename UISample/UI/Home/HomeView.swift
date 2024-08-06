@@ -17,23 +17,20 @@ extension HomeView {
     }
     
     @ViewBuilder private func routing(route: Route) -> some View {
-        NavigationStack(path: $navRouter.path) {
-            switch route {
-            case .term:
-                SheetView()
-            case .privacy(let message):
-                SubSheetView(text: message)
-            case .full:
-                PresentingView()
-            case .setting:
-                SettingView()
-            case .practice(let cellVM):
-                if let lessonModel = cellVM.lessonModel {
-                    PracticeView(viewModel: PracticeView.ViewModel.viewModel(container: viewModel.container, lessonModel: lessonModel))
-                }
+        switch route {
+        case .term:
+            SheetView()
+        case .privacy(let message):
+            SubSheetView(text: message)
+        case .full:
+            PresentingView()
+        case .setting:
+            SettingView()
+        case .practice(let cellVM):
+            if let lessonModel = cellVM.lessonModel {
+                PracticeView(viewModel: PracticeView.ViewModel.viewModel(container: viewModel.container, lessonModel: lessonModel))
             }
         }
-        .environmentObject(navRouter)
     }
 }
 
@@ -62,23 +59,31 @@ struct HomeView: View {
                 ForEach(viewModel.units) { unitModel in
                     Section(header: Text(unitModel.title)) {
                         ForEach(viewModel.lessons(unitNo: unitModel.unitNo)) { cellVM in
-                            LessonCell(viewModel: cellVM)
+                            ZStack {
+                                LessonCell(viewModel: cellVM)
+                                Button {
+                                    presentRouter.fullScreenCover(route: Route.practice(cellVM: cellVM))
+                                } label: {
+                                }
+
+                            }
                         }
                     }
                 }
             }
-            .onChange(of: viewModel.selectedLesson, perform: { newValue in
-                guard let newValue = newValue else { return }
-                guard let model = viewModel.lesson(by: newValue) else { return }
-                presentRouter.fullScreenCover(route: Route.practice(cellVM: model))
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    viewModel.selectedLesson = nil
-                }
-
-            })
+            
         }
+        .onChange(of: viewModel.selectedLesson, perform: { newValue in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                viewModel.selectedLesson = nil
+            }
+
+        })
         .fullScreenCover(item: $presentRouter.fullScreen) { route in
-            routing(route: route)
+            NavigationStack(path: $navRouter.path) {
+                routing(route: route)
+            }
+            .environmentObject(navRouter)
         }
     }
 }

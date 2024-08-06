@@ -7,49 +7,41 @@
 
 import SwiftUI
 
-extension TextCell {
-    enum Route: Routable {
-        case main
-    }
-    
-    // Builds the views
-    @ViewBuilder func routing(for route: Route) -> some View {
-        switch route {
-        case .main:
-            MainView(viewModel: .init(baseViewModel: viewModel))
-        }
-    }
-}
 
 struct TextCell: View {
     let viewModel: ViewModel
     
     var body: some View {
-        content
-            .navigationDestination(for: Route.self) { route in
-                routing(for: route)
-            }
-            .onAppear {
-                self.viewModel.onAppear()
-            }
+        //GeometryReader { proxy in
+            content
+                .onAppear {
+                    self.viewModel.onAppear()
+                }
+        //}
     }
     
     var content: some View {
-        ScrollView {
-            VStack {
-                Text(viewModel.text)
-            }
-        }
+        Text(viewModel.text)
+            .font(.body1)
+        
     }
 }
 
 extension TextCell {
-    class ViewModel: BaseViewModel {
+    class ViewModel: BaseViewModel, Hashable {
         var text: String = ""
         var size: CGSize = .init(width: 20, height: 20)
         var index: Int = 0
         
         func onAppear() {
+        }
+        
+        static func == (lhs: ViewModel, rhs: ViewModel) -> Bool {
+            return lhs.index == rhs.index
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(index)
         }
     }
 }

@@ -33,6 +33,8 @@ struct PracticeView: View {
     
     @State private var geometrySize: CGSize = .zero
     
+    @State private var itemsArranged: [[TextCell.ViewModel]] = []
+    
     var body: some View {
         
         content
@@ -55,22 +57,63 @@ struct PracticeView: View {
     }
     
     var content: some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            WaterfallGrid(viewModel.cellVMList) { cellVM in
-                TextCell(viewModel: cellVM)
+        GeometryReader { geometry in
+            ScrollView {
+                LazyVStack(alignment: .leading) {
+                    ForEach(0 ..< itemsArranged.count, id: \.self) { row in
+                        let itemsInRow = itemsArranged[row]
+                        HStack(spacing: 10) {
+                            ForEach(0 ..< itemsInRow.count, id: \.self) { column in
+                                let cellVM = itemsInRow[column]
+                                TextCell(viewModel: cellVM)
+                            }
+                            Spacer()
+                        }
+                        
+                        .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
+                    }
+                    GeometryReader { proxy in
+                        HStack {} // just an empty container to triggers the onAppear
+                            .onAppear {
+                                itemsArranged = arrangeItems(viewModel.cellVMList, containerWidth: geometry.size.width, horizontalSpacing: 10, horizontalPadding: 12)
+                            }
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
-            .gridStyle(
-                columnsInPortrait: Int(4),
-                columnsInLandscape: Int(5),
-                spacing: CGFloat(8),
-                animation: .default
-            )
-            .scrollOptions(direction: .vertical)
-            .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onChange(of: geometry.size) { newValue in
+                //itemsArranged = arrangeItems(viewModel.cellVMList, containerWidth: geometry.size.width, horizontalSpacing: 10, horizontalPadding: 12)
+            }
         }
-        .navigationDestination(for: Route.self) { route in
-            routing(for: route)
+    }
+}
+
+extension PracticeView {
+    private func arrangeItems(_ cellVMList: [TextCell.ViewModel], containerWidth: CGFloat, horizontalSpacing: CGFloat, horizontalPadding: CGFloat) -> [[TextCell.ViewModel]] {
+        
+        let contentWidth = containerWidth - horizontalPadding * 2
+        var width: CGFloat = 0
+        
+        var arrangeItems: [[TextCell.ViewModel]] = []
+        var rows: [TextCell.ViewModel] = []
+        
+        for cellVM in cellVMList {
+            let cellWidth = cellVM.text.width(withConstrainedHeight: .infinity, font: .body1)
+            width += cellWidth
+            if width > contentWidth {
+                arrangeItems.append(rows)
+                rows = []
+                width = 0
+            }
+            rows.append(cellVM)
+            width += horizontalSpacing
         }
+        if rows.count > 0 {
+            arrangeItems.append(rows)
+        }
+        
+        return arrangeItems
     }
 }
 
@@ -84,7 +127,7 @@ extension PracticeView {
         @Published var cellVMList: [TextCell.ViewModel] = []
         
         func fetch() {
-            let text = "This is a test content"
+            let text = "This is a test content This is a test content This is a test content This is a test content"
             let components = text.components(separatedBy: .whitespaces)
             
             var list: [TextCell.ViewModel] = []
