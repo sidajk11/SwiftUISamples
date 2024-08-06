@@ -68,18 +68,14 @@ struct HomeView: View {
                 }
             }
             .onChange(of: viewModel.selectedLesson, perform: { newValue in
+                guard let newValue = newValue else { return }
                 guard let model = viewModel.lesson(by: newValue) else { return }
                 presentRouter.fullScreenCover(route: Route.practice(cellVM: model))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    viewModel.selectedLesson = nil
+                }
+
             })
-//            if #available(iOS 17.0, *) {
-//                onChange(of: viewModel.selectedLesson) { _, _ in
-//                    presentRouter.fullScreenCover(route: Route.profile)
-//                }
-//            } else {
-//                onChange(of: viewModel.selectedLesson, perform: { newValue in
-//                    presentRouter.fullScreenCover(route: Route.profile)
-//                })
-//            }
         }
         .fullScreenCover(item: $presentRouter.fullScreen) { route in
             routing(route: route)
@@ -119,7 +115,7 @@ extension HomeView {
         private func loadTest() {
             var list: [UnitModel] = []
             for i in 0 ..< 20 {
-                let uuid = UUID().uuidString
+                let uuid = UUID()
                 let unitNo = i + 1
                 let unitModel = UnitModel(id: uuid, levelNo: 1, unitNo: unitNo, title: "Unit \(unitNo)", desc: "desc", imageUrl: "")
                 list.append(unitModel)
@@ -140,7 +136,7 @@ extension HomeView {
         private func loadLessonsTest(unitNo: Int) -> [LessonModel] {
             var list: [LessonModel] = []
             for i in 0 ..< 10 {
-                let uuid = UUID().uuidString
+                let uuid = UUID()
                 let lessonNo = i + 1
                 let lessonModel = LessonModel(levelNo: 1, unitNo: unitNo, id: uuid, lessonNo: lessonNo, title: "Lesson \(lessonNo)", desc: "desc")
                 list.append(lessonModel)

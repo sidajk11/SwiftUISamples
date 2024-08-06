@@ -51,7 +51,7 @@ struct LessonCell: View {
 }
 
 extension LessonCell {
-    class ViewModel: BaseViewModel, Identifiable, Hashable {
+    class ViewModel: BaseViewModel, Hashable {
         var lessonModel: LessonModel?
         
         var title: String = ""

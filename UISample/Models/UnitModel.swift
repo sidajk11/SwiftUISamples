@@ -8,7 +8,7 @@
 import Foundation
 
 struct UnitModel: Codable, Identifiable {
-    let id: String
+    let id: UUID
     
     let levelNo: Int
     let unitNo: Int
@@ -27,6 +27,7 @@ extension UnitModel {
         }
         let levelNo = managedObject.levelNo
         let unitNo = managedObject.unitNo
-        self.init(id: unitId, levelNo: Int(levelNo), unitNo: Int(unitNo), title: title, desc: desc, imageUrl: "")
+        let uuid = UUID(uuidString: unitId) ?? UUID()
+        self.init(id: uuid, levelNo: Int(levelNo), unitNo: Int(unitNo), title: title, desc: desc, imageUrl: "")
     }
 }

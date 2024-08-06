@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WaterfallGrid
 
 extension PracticeView {
     enum Route: Routable {
@@ -28,15 +29,9 @@ extension PracticeView {
 struct PracticeView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    let viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     
     @State private var geometrySize: CGSize = .zero
-    
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
     
     var body: some View {
         
@@ -54,13 +49,24 @@ struct PracticeView: View {
                     }
                 }
             }
+            .onAppear() {
+                
+            }
     }
     
     var content: some View {
-        ScrollView {
-            VStack {
-                Text(viewModel.title)
+        ScrollView(.vertical, showsIndicators: true) {
+            WaterfallGrid(viewModel.cellVMList) { cellVM in
+                TextCell(viewModel: cellVM)
             }
+            .gridStyle(
+                columnsInPortrait: Int(4),
+                columnsInLandscape: Int(5),
+                spacing: CGFloat(8),
+                animation: .default
+            )
+            .scrollOptions(direction: .vertical)
+            .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
         }
         .navigationDestination(for: Route.self) { route in
             routing(for: route)
@@ -75,8 +81,22 @@ extension PracticeView {
         
         @Published var title: String = ""
         
-        func onAppear() {
+        @Published var cellVMList: [TextCell.ViewModel] = []
+        
+        func fetch() {
+            let text = "This is a test content"
+            let components = text.components(separatedBy: .whitespaces)
             
+            var list: [TextCell.ViewModel] = []
+            let count = components.count
+            for i in 0 ..< count {
+                let component = components[i]
+                let cellVM = TextCell.ViewModel(container: container)
+                cellVM.text = component
+                cellVM.index = i
+                list.append(cellVM)
+            }
+            cellVMList = list
         }
         
         static func viewModel(container: DIContainer, lessonModel: LessonModel) -> ViewModel {
@@ -84,6 +104,8 @@ extension PracticeView {
             vm.lessonModel = lessonModel
             
             vm.title = lessonModel.title
+            
+            vm.fetch()
             
             return vm
         }

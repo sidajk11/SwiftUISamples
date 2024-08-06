@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-class BaseViewModel: ObservableObject {
+class BaseViewModel: ObservableObject, Identifiable {
     let container: DIContainer
     let cancelBag = CancelBag()
     
