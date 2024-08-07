@@ -11,37 +11,36 @@ import SwiftUI
 struct TextCell: View {
     let viewModel: ViewModel
     
+    private let padding: CGFloat = 0
+    
     var body: some View {
-        //GeometryReader { proxy in
-            content
-                .onAppear {
-                    self.viewModel.onAppear()
-                }
-        //}
+        content
+            .onAppear {
+                self.viewModel.onAppear()
+            }
+            .readSize { size in
+                print("\(viewModel.text) \(size.width)")
+            }
     }
     
     var content: some View {
-        Text(viewModel.text)
-            .font(.body1)
-        
+        Button {
+            
+        } label: {
+            Text(viewModel.text)
+                .font(.body1)
+                .padding(EdgeInsets(top: 0, leading: padding, bottom: 0, trailing: padding))
+        }
+        .buttonStyle(.plain)
     }
 }
 
 extension TextCell {
-    class ViewModel: BaseViewModel, Hashable {
+    class ViewModel: BaseViewModel {
         var text: String = ""
-        var size: CGSize = .init(width: 20, height: 20)
         var index: Int = 0
         
         func onAppear() {
-        }
-        
-        static func == (lhs: ViewModel, rhs: ViewModel) -> Bool {
-            return lhs.index == rhs.index
-        }
-        
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(index)
         }
     }
 }

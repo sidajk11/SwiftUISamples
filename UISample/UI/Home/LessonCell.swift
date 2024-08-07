@@ -51,7 +51,7 @@ struct LessonCell: View {
 }
 
 extension LessonCell {
-    class ViewModel: BaseViewModel, Hashable {
+    class ViewModel: BaseViewModel {
         var lessonModel: LessonModel?
         
         var title: String = ""
@@ -65,14 +65,6 @@ extension LessonCell {
         
         func onAppear() {
             
-        }
-        
-        static func == (lhs: ViewModel, rhs: ViewModel) -> Bool {
-            return lhs.id == rhs.id
-        }
-        
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(lessonModel?.id)
         }
     }
 }

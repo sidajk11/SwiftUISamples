@@ -33,7 +33,12 @@ struct PracticeView: View {
     
     @State private var geometrySize: CGSize = .zero
     
-    @State private var itemsArranged: [[TextCell.ViewModel]] = []
+    private let horizontalSpacing: CGFloat = 10
+    private let horizontalPadding: CGFloat = 12
+    
+    @State private var gridHeight: CGFloat = 0
+
+    @State private var alignmentGuides = [AnyHashable: CGPoint]()
     
     var body: some View {
         
@@ -57,39 +62,80 @@ struct PracticeView: View {
     }
     
     var content: some View {
-        GeometryReader { geometry in
-            ScrollView {
-                LazyVStack(alignment: .leading) {
-                    ForEach(0 ..< itemsArranged.count, id: \.self) { row in
-                        let itemsInRow = itemsArranged[row]
-                        HStack(spacing: 10) {
-                            ForEach(0 ..< itemsInRow.count, id: \.self) { column in
-                                let cellVM = itemsInRow[column]
-                                TextCell(viewModel: cellVM)
+        ScrollView {
+            VStack {
+                GeometryReader { geometry in
+                    self.grid()
+                        .onPreferenceChange(ElementPreferenceKey.self, perform: { preferences in
+                            DispatchQueue.global(qos: .userInteractive).async {
+                                let (alignmentGuides, gridHeight) = self.alignmentsAndGridHeight(preferences: preferences)
+                                DispatchQueue.main.async {
+                                    self.alignmentGuides = alignmentGuides
+                                    self.gridHeight = gridHeight
+                                }
                             }
-                            Spacer()
-                        }
-                        
-                        .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
-                    }
-                    GeometryReader { proxy in
-                        HStack {} // just an empty container to triggers the onAppear
-                            .onAppear {
-                                itemsArranged = arrangeItems(viewModel.cellVMList, containerWidth: geometry.size.width, horizontalSpacing: 10, horizontalPadding: 12)
-                            }
-                    }
+                        })
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onChange(of: geometry.size) { newValue in
-                //itemsArranged = arrangeItems(viewModel.cellVMList, containerWidth: geometry.size.width, horizontalSpacing: 10, horizontalPadding: 12)
-            }
+            .frame(width: nil, height: gridHeight)
         }
+    }
+    
+    private func grid() -> some View {
+            ZStack(alignment: .topLeading) {
+            ForEach(viewModel.list, id: \.id) { cellVM in
+                TextCell(viewModel: cellVM)
+                    .alignmentGuide(.trailing, computeValue: { _ in -100 })
+                //.alignmentGuide(.leading, computeValue: { _ in 10 })
+                //                        .background(PreferenceSetter(id: cellVM.id))
+                //                        .alignmentGuide(.top, computeValue: { _ in self.alignmentGuides[cellVM.id]?.y ?? 0 })
+                //                        .alignmentGuide(.leading, computeValue: { _ in self.alignmentGuides[cellVM.id]?.x ?? 0 })
+                //                        .opacity(self.alignmentGuides[cellVM.id] != nil ? 1 : 0)
+        }
+            }
     }
 }
 
 extension PracticeView {
+    func alignmentsAndGridHeight(preferences: [ElementPreferenceData]) -> ([AnyHashable: CGPoint], CGFloat) {
+        var alignmentGuides = [AnyHashable: CGPoint]()
+
+        preferences.forEach { preference in
+            alignmentGuides[preference.id] = CGPoint(x: -40, y: 200)
+        }
+        
+        let gridHeight: CGFloat = 1000
+        
+        return (alignmentGuides, gridHeight)
+    }
+    
+    private func arrangeItem(containerWidth: CGFloat, preferences: [ElementPreferenceData]) -> [[TextCell.ViewModel]] {
+        let contentWidth = containerWidth - horizontalPadding * 2
+        var width: CGFloat = 0
+        
+        var arrangeItems: [[TextCell.ViewModel]] = []
+        var rows: [TextCell.ViewModel] = []
+        
+        for element in preferences {
+            guard let cellVM = viewModel.cellVMList[element.id] else { continue }
+            
+            let cellWidth = element.size.width
+            width += cellWidth
+            if width > contentWidth {
+                arrangeItems.append(rows)
+                rows = []
+                width = cellWidth
+            }
+            rows.append(cellVM)
+            width += horizontalSpacing
+        }
+        if rows.count > 0 {
+            arrangeItems.append(rows)
+        }
+        
+        return arrangeItems
+    }
+    
     private func arrangeItems(_ cellVMList: [TextCell.ViewModel], containerWidth: CGFloat, horizontalSpacing: CGFloat, horizontalPadding: CGFloat) -> [[TextCell.ViewModel]] {
         
         let contentWidth = containerWidth - horizontalPadding * 2
@@ -99,12 +145,13 @@ extension PracticeView {
         var rows: [TextCell.ViewModel] = []
         
         for cellVM in cellVMList {
-            let cellWidth = cellVM.text.width(withConstrainedHeight: .infinity, font: .body1)
+            let cellWidth = cellVM.text.width(withConstrainedHeight: .greatestFiniteMagnitude, font: .body1)
+            print("\(cellVM.text) calc size: \(cellWidth)")
             width += cellWidth
             if width > contentWidth {
                 arrangeItems.append(rows)
                 rows = []
-                width = 0
+                width = cellWidth
             }
             rows.append(cellVM)
             width += horizontalSpacing
@@ -124,12 +171,17 @@ extension PracticeView {
         
         @Published var title: String = ""
         
-        @Published var cellVMList: [TextCell.ViewModel] = []
+        @Published var list: [TextCell.ViewModel] = []
+        
+        @Published var cellVMList: [AnyHashable : TextCell.ViewModel] = [:]
+        
+        @Published var itemsArranged: [[TextCell.ViewModel]] = []
         
         func fetch() {
-            let text = "This is a test content This is a test content This is a test content This is a test content"
+            let text = "SwiftUI is a modern framework ______ introduced by Apple for building user interfaces"
             let components = text.components(separatedBy: .whitespaces)
             
+            var dict: [AnyHashable : TextCell.ViewModel] = [:]
             var list: [TextCell.ViewModel] = []
             let count = components.count
             for i in 0 ..< count {
@@ -137,9 +189,14 @@ extension PracticeView {
                 let cellVM = TextCell.ViewModel(container: container)
                 cellVM.text = component
                 cellVM.index = i
+                dict[cellVM.id] = cellVM
                 list.append(cellVM)
             }
-            cellVMList = list
+            cellVMList = dict
+            
+            itemsArranged = [list]
+            
+            self.list = list
         }
         
         static func viewModel(container: DIContainer, lessonModel: LessonModel) -> ViewModel {

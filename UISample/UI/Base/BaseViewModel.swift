@@ -9,6 +9,10 @@ import SwiftUI
 import Combine
 
 class BaseViewModel: ObservableObject, Identifiable {
+    typealias ID = UUID
+    
+    let id: UUID = UUID()
+    
     let container: DIContainer
     let cancelBag = CancelBag()
     
@@ -22,5 +26,15 @@ class BaseViewModel: ObservableObject, Identifiable {
     
     convenience init(baseViewModel: BaseViewModel) {
         self.init(container: baseViewModel.container)
+    }
+}
+
+extension BaseViewModel: Hashable {
+    static func == (lhs: BaseViewModel, rhs: BaseViewModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
