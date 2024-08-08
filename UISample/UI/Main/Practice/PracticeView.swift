@@ -32,6 +32,7 @@ struct PracticeView: View {
     @ObservedObject var viewModel: ViewModel
     
     @State private var geometrySize: CGSize = .zero
+    @State private var preferences: [ElementPreferenceData] = []
     
     private let horizontalSpacing: CGFloat = 10
     private let horizontalPadding: CGFloat = 12
@@ -56,6 +57,10 @@ struct PracticeView: View {
                     }
                 }
             }
+            .readSize(onChange: { size in
+                geometrySize = size
+                layout()
+            })
             .onAppear() {
                 
             }
@@ -67,46 +72,94 @@ struct PracticeView: View {
                 GeometryReader { geometry in
                     self.grid()
                         .onPreferenceChange(ElementPreferenceKey.self, perform: { preferences in
-                            DispatchQueue.global(qos: .userInteractive).async {
-                                let (alignmentGuides, gridHeight) = self.alignmentsAndGridHeight(preferences: preferences)
-                                DispatchQueue.main.async {
-                                    self.alignmentGuides = alignmentGuides
-                                    self.gridHeight = gridHeight
-                                }
-                            }
+                            self.preferences = preferences
+                            layout()
                         })
                 }
             }
-            .frame(width: nil, height: gridHeight)
+            .frame(width: nil, height: nil)
         }
     }
     
     private func grid() -> some View {
-            ZStack(alignment: .topLeading) {
+        ZStack(alignment: .topLeading) {
             ForEach(viewModel.list, id: \.id) { cellVM in
                 TextCell(viewModel: cellVM)
-                    .alignmentGuide(.trailing, computeValue: { _ in -100 })
-                //.alignmentGuide(.leading, computeValue: { _ in 10 })
-                //                        .background(PreferenceSetter(id: cellVM.id))
-                //                        .alignmentGuide(.top, computeValue: { _ in self.alignmentGuides[cellVM.id]?.y ?? 0 })
-                //                        .alignmentGuide(.leading, computeValue: { _ in self.alignmentGuides[cellVM.id]?.x ?? 0 })
-                //                        .opacity(self.alignmentGuides[cellVM.id] != nil ? 1 : 0)
-        }
+                    .background(PreferenceSetter(id: cellVM.id))
+                    .alignmentGuide(.top, computeValue: { _ in self.alignmentGuides[cellVM.id]?.y ?? 0 })
+                    .alignmentGuide(.leading, computeValue: { _ in self.alignmentGuides[cellVM.id]?.x ?? 0 })
+                    //.opacity(self.alignmentGuides[cellVM.id] != nil ? 1 : 0)
             }
+        }
     }
 }
 
 extension PracticeView {
-    func alignmentsAndGridHeight(preferences: [ElementPreferenceData]) -> ([AnyHashable: CGPoint], CGFloat) {
+    func layout() {
+        guard preferences.count > 0 else { return }
+        guard geometrySize.width > .ulpOfOne else { return }
+        
         var alignmentGuides = [AnyHashable: CGPoint]()
+        
+        var width: CGFloat = 0
+        var totalHeight: CGFloat = 0
 
         preferences.forEach { preference in
-            alignmentGuides[preference.id] = CGPoint(x: -40, y: 200)
+            let preferenceSizeWidth = preference.size.width
+            let preferenceSizeHeight = preference.size.height
+            if width > geometrySize.width {
+                width = 0
+                totalHeight += preferenceSizeHeight
+            }
+            let height = totalHeight
+            let offset = CGPoint(x: 0 - (width),
+                                 y: 0 - (height))
+            alignmentGuides[preference.id] = offset
+            
+            width = width + preferenceSizeWidth + 10
         }
         
-        let gridHeight: CGFloat = 1000
+        self.alignmentGuides = alignmentGuides
+    }
+    
+    func alignmentsAndGridHeight(geometry: GeometryProxy, preferences: [ElementPreferenceData]) -> ([AnyHashable: CGPoint], CGFloat) {
         
-        return (alignmentGuides, gridHeight)
+        var alignmentGuides = [AnyHashable: CGPoint]()
+        
+        var totalWidth: CGFloat = 0
+        var totalHeight: CGFloat = 0
+
+        preferences.forEach { preference in
+            let preferenceSizeWidth = preference.size.width
+            let preferenceSizeHeight = preference.size.height
+            var width = totalWidth + preferenceSizeWidth + 10
+            if width > geometrySize.width {
+                width = 0
+                totalWidth = 0
+                totalHeight += preferenceSizeHeight
+            }
+            let height = totalHeight
+            let offset = CGPoint(x: 0 - (width),
+                                 y: 0 - (height))
+            alignmentGuides[preference.id] = offset
+        }
+        
+        //let gridHeight = max(0, (heights.max() ?? 10) - 10)
+        
+        return (alignmentGuides, 1000)
+//        var alignmentGuides = [AnyHashable: CGPoint]()
+//
+//        preferences.forEach { preference in
+//            let width = preference.size.width
+//            let height = preference.size.height
+//            let offset = CGPoint(x: 0 - width,
+//                                 y: 0 - height)
+//            alignmentGuides[preference.id] = offset
+//        }
+//        
+//        let gridHeight: CGFloat = 1000
+//        
+//        return (alignmentGuides, gridHeight)
     }
     
     private func arrangeItem(containerWidth: CGFloat, preferences: [ElementPreferenceData]) -> [[TextCell.ViewModel]] {
