@@ -29,6 +29,7 @@ extension HomeView {
         case .practice(let cellVM):
             if let lessonModel = cellVM.lessonModel {
                 PracticeView(viewModel: PracticeView.ViewModel.viewModel(container: viewModel.container, lessonModel: lessonModel))
+                //WeatherView(viewModel: .init(container: viewModel.container))
             }
         }
     }

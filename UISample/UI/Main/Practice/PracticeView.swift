@@ -86,11 +86,18 @@ struct PracticeView: View {
             ForEach(viewModel.list, id: \.id) { cellVM in
                 TextCell(viewModel: cellVM)
                     .background(PreferenceSetter(id: cellVM.id))
-                    .alignmentGuide(.top, computeValue: { _ in self.alignmentGuides[cellVM.id]?.y ?? 0 })
-                    .alignmentGuide(.leading, computeValue: { _ in self.alignmentGuides[cellVM.id]?.x ?? 0 })
+                    .alignmentGuide(.top) { d in
+                        self.alignmentGuides[cellVM.id]?.y ?? 0
+                    }
+                    .alignmentGuide(.leading) { d in
+                        self.alignmentGuides[cellVM.id]?.x ?? 0
+                    }
                     //.opacity(self.alignmentGuides[cellVM.id] != nil ? 1 : 0)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
+        .border(.green)
     }
 }
 
@@ -103,117 +110,23 @@ extension PracticeView {
         
         var width: CGFloat = 0
         var totalHeight: CGFloat = 0
-
+        
+        let containerWidth = geometrySize.width - horizontalPadding * 2
         preferences.forEach { preference in
             let preferenceSizeWidth = preference.size.width
             let preferenceSizeHeight = preference.size.height
-            if width > geometrySize.width {
+            if width + preferenceSizeWidth > containerWidth {
                 width = 0
                 totalHeight += preferenceSizeHeight
             }
-            let height = totalHeight
             let offset = CGPoint(x: 0 - (width),
-                                 y: 0 - (height))
+                                 y: 0 - (totalHeight))
             alignmentGuides[preference.id] = offset
             
-            width = width + preferenceSizeWidth + 10
+            width = width + preferenceSizeWidth + horizontalSpacing
         }
         
         self.alignmentGuides = alignmentGuides
-    }
-    
-    func alignmentsAndGridHeight(geometry: GeometryProxy, preferences: [ElementPreferenceData]) -> ([AnyHashable: CGPoint], CGFloat) {
-        
-        var alignmentGuides = [AnyHashable: CGPoint]()
-        
-        var totalWidth: CGFloat = 0
-        var totalHeight: CGFloat = 0
-
-        preferences.forEach { preference in
-            let preferenceSizeWidth = preference.size.width
-            let preferenceSizeHeight = preference.size.height
-            var width = totalWidth + preferenceSizeWidth + 10
-            if width > geometrySize.width {
-                width = 0
-                totalWidth = 0
-                totalHeight += preferenceSizeHeight
-            }
-            let height = totalHeight
-            let offset = CGPoint(x: 0 - (width),
-                                 y: 0 - (height))
-            alignmentGuides[preference.id] = offset
-        }
-        
-        //let gridHeight = max(0, (heights.max() ?? 10) - 10)
-        
-        return (alignmentGuides, 1000)
-//        var alignmentGuides = [AnyHashable: CGPoint]()
-//
-//        preferences.forEach { preference in
-//            let width = preference.size.width
-//            let height = preference.size.height
-//            let offset = CGPoint(x: 0 - width,
-//                                 y: 0 - height)
-//            alignmentGuides[preference.id] = offset
-//        }
-//        
-//        let gridHeight: CGFloat = 1000
-//        
-//        return (alignmentGuides, gridHeight)
-    }
-    
-    private func arrangeItem(containerWidth: CGFloat, preferences: [ElementPreferenceData]) -> [[TextCell.ViewModel]] {
-        let contentWidth = containerWidth - horizontalPadding * 2
-        var width: CGFloat = 0
-        
-        var arrangeItems: [[TextCell.ViewModel]] = []
-        var rows: [TextCell.ViewModel] = []
-        
-        for element in preferences {
-            guard let cellVM = viewModel.cellVMList[element.id] else { continue }
-            
-            let cellWidth = element.size.width
-            width += cellWidth
-            if width > contentWidth {
-                arrangeItems.append(rows)
-                rows = []
-                width = cellWidth
-            }
-            rows.append(cellVM)
-            width += horizontalSpacing
-        }
-        if rows.count > 0 {
-            arrangeItems.append(rows)
-        }
-        
-        return arrangeItems
-    }
-    
-    private func arrangeItems(_ cellVMList: [TextCell.ViewModel], containerWidth: CGFloat, horizontalSpacing: CGFloat, horizontalPadding: CGFloat) -> [[TextCell.ViewModel]] {
-        
-        let contentWidth = containerWidth - horizontalPadding * 2
-        var width: CGFloat = 0
-        
-        var arrangeItems: [[TextCell.ViewModel]] = []
-        var rows: [TextCell.ViewModel] = []
-        
-        for cellVM in cellVMList {
-            let cellWidth = cellVM.text.width(withConstrainedHeight: .greatestFiniteMagnitude, font: .body1)
-            print("\(cellVM.text) calc size: \(cellWidth)")
-            width += cellWidth
-            if width > contentWidth {
-                arrangeItems.append(rows)
-                rows = []
-                width = cellWidth
-            }
-            rows.append(cellVM)
-            width += horizontalSpacing
-        }
-        if rows.count > 0 {
-            arrangeItems.append(rows)
-        }
-        
-        return arrangeItems
     }
 }
 
@@ -231,7 +144,7 @@ extension PracticeView {
         @Published var itemsArranged: [[TextCell.ViewModel]] = []
         
         func fetch() {
-            let text = "SwiftUI is a modern framework ______ introduced by Apple for building user interfaces"
+            let text = "SwiftUI is a modern framework ______ introdu by Apple for building user interfaces sfds sdf  dfjfsdsdf dsf jljf jsd fdjsk fdkjl sdfd adsjkf ljsdf ljsadf jdskf sdljf dklsfj asdjfldk fldsf sdl fjds lfjdsfkjsdlfkj sld dlk jfdsjkfsdlkjflasdjf lsdfldsjfldsjf lsdjf sadljf jds fkjldsljk fsdlkajfl kdsjfl jksdlfj sdljkf sdlak"
             let components = text.components(separatedBy: .whitespaces)
             
             var dict: [AnyHashable : TextCell.ViewModel] = [:]

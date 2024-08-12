@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		640239102C69CAD900DA19C6 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402390F2C69CAD900DA19C6 /* WeatherView.swift */; };
 		640953F92C4E16940071FBBA /* db_model_v1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 640953F72C4E16940071FBBA /* db_model_v1.xcdatamodeld */; };
 		640953FC2C4E1EEC0071FBBA /* Dictionary+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640953FB2C4E1EEC0071FBBA /* Dictionary+Json.swift */; };
 		643C32662C17E17C00B60246 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32652C17E17C00B60246 /* MainView.swift */; };
@@ -97,6 +98,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6402390F2C69CAD900DA19C6 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		640953F82C4E16940071FBBA /* db_model_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db_model_v1.xcdatamodel; sourceTree = "<group>"; };
 		640953FB2C4E1EEC0071FBBA /* Dictionary+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Json.swift"; sourceTree = "<group>"; };
 		643C32652C17E17C00B60246 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				64753CF92C624A9D00B8F8AF /* PracticeView.swift */,
 				64753CFC2C624A9D00B8F8AF /* RectangleView.swift */,
 				64753CFB2C624A9D00B8F8AF /* TextCell.swift */,
+				6402390F2C69CAD900DA19C6 /* WeatherView.swift */,
 			);
 			path = Practice;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				6484BB772C1AA1D300B1D158 /* CloseButton.swift in Sources */,
 				643C326B2C18068200B60246 /* AppDelegate.swift in Sources */,
 				6474812B2C4B3EF20034CB8A /* AppState.swift in Sources */,
+				640239102C69CAD900DA19C6 /* WeatherView.swift in Sources */,
 				64753D132C626FF000B8F8AF /* String+Data.swift in Sources */,
 				64F8CD4D2C0D6C2700943395 /* Test.swift in Sources */,
 				64753D192C626FF000B8F8AF /* String+RegEx.swift in Sources */,

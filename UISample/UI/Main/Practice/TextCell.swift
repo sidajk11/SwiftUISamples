@@ -25,7 +25,7 @@ struct TextCell: View {
     
     var content: some View {
         Button {
-            
+            print(viewModel.text)
         } label: {
             Text(viewModel.text)
                 .font(.body1)
