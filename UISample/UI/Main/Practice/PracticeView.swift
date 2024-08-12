@@ -57,34 +57,47 @@ struct PracticeView: View {
                     }
                 }
             }
-            .readSize(onChange: { size in
-                geometrySize = size
-                layout()
-            })
-            .onAppear() {
-                
-            }
     }
     
     var content: some View {
-        ScrollView {
-            VStack {
-                GeometryReader { geometry in
-                    self.grid()
-                        .onPreferenceChange(ElementPreferenceKey.self, perform: { preferences in
-                            self.preferences = preferences
-                            layout()
-                        })
-                }
+        VStack {
+            AutoLayoutGrid(viewModel.textCellVMlist) { vm in
+                TextCell(viewModel: vm)
             }
-            .frame(width: nil, height: nil)
+            .border(.appBlue600)
+            
+            AutoLayoutGrid(viewModel.answerCellVMList) { vm in
+                AnswerTextCell(viewModel: vm)
+            }
+            .border(.appRedOrange300)
+            
+            Spacer()
         }
     }
     
-    private func grid() -> some View {
+    private func sentenceView() -> some View {
         ZStack(alignment: .topLeading) {
-            ForEach(viewModel.list, id: \.id) { cellVM in
+            ForEach(viewModel.textCellVMlist, id: \.id) { cellVM in
                 TextCell(viewModel: cellVM)
+                    .background(PreferenceSetter(id: cellVM.id))
+                    .alignmentGuide(.top) { d in
+                        self.alignmentGuides[cellVM.id]?.y ?? 0
+                    }
+                    .alignmentGuide(.leading) { d in
+                        self.alignmentGuides[cellVM.id]?.x ?? 0
+                    }
+                    //.opacity(self.alignmentGuides[cellVM.id] != nil ? 1 : 0)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
+        .border(.green)
+    }
+    
+    private func answersView() -> some View {
+        ZStack(alignment: .topLeading) {
+            ForEach(viewModel.answerCellVMList, id: \.id) { cellVM in
+                AnswerTextCell(viewModel: cellVM)
                     .background(PreferenceSetter(id: cellVM.id))
                     .alignmentGuide(.top) { d in
                         self.alignmentGuides[cellVM.id]?.y ?? 0
@@ -119,8 +132,7 @@ extension PracticeView {
                 width = 0
                 totalHeight += preferenceSizeHeight
             }
-            let offset = CGPoint(x: 0 - (width),
-                                 y: 0 - (totalHeight))
+            let offset = CGPoint(x: 0 - (width), y: 0 - (totalHeight))
             alignmentGuides[preference.id] = offset
             
             width = width + preferenceSizeWidth + horizontalSpacing
@@ -137,14 +149,12 @@ extension PracticeView {
         
         @Published var title: String = ""
         
-        @Published var list: [TextCell.ViewModel] = []
+        @Published var textCellVMlist: [TextCell.ViewModel] = []
         
-        @Published var cellVMList: [AnyHashable : TextCell.ViewModel] = [:]
-        
-        @Published var itemsArranged: [[TextCell.ViewModel]] = []
+        @Published var answerCellVMList: [AnswerTextCell.ViewModel] = []
         
         func fetch() {
-            let text = "SwiftUI is a modern framework ______ introdu by Apple for building user interfaces sfds sdf  dfjfsdsdf dsf jljf jsd fdjsk fdkjl sdfd adsjkf ljsdf ljsadf jdskf sdljf dklsfj asdjfldk fldsf sdl fjds lfjdsfkjsdlfkj sld dlk jfdsjkfsdlkjflasdjf lsdfldsjfldsjf lsdjf sadljf jds fkjldsljk fsdlkajfl kdsjfl jksdlfj sdljkf sdlak"
+            let text = "SwiftUI is a modern framework ______ introdu by Apple for building user interfaces"
             let components = text.components(separatedBy: .whitespaces)
             
             var dict: [AnyHashable : TextCell.ViewModel] = [:]
@@ -158,11 +168,26 @@ extension PracticeView {
                 dict[cellVM.id] = cellVM
                 list.append(cellVM)
             }
-            cellVMList = dict
             
-            itemsArranged = [list]
+            self.textCellVMlist = list
+        }
+        
+        func fetchAnswers() {
+            let components = ["Correct", "Dummy1", "Dummy2", "Dummy3"]
             
-            self.list = list
+            var dict: [AnyHashable : AnswerTextCell.ViewModel] = [:]
+            var list: [AnswerTextCell.ViewModel] = []
+            let count = components.count
+            for i in 0 ..< count {
+                let component = components[i]
+                let cellVM = AnswerTextCell.ViewModel(container: container)
+                cellVM.text = component
+                cellVM.index = i
+                dict[cellVM.id] = cellVM
+                list.append(cellVM)
+            }
+            
+            self.answerCellVMList = list
         }
         
         static func viewModel(container: DIContainer, lessonModel: LessonModel) -> ViewModel {
@@ -172,6 +197,7 @@ extension PracticeView {
             vm.title = lessonModel.title
             
             vm.fetch()
+            vm.fetchAnswers()
             
             return vm
         }

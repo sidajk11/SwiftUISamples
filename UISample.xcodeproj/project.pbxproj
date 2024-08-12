@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		640239102C69CAD900DA19C6 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402390F2C69CAD900DA19C6 /* WeatherView.swift */; };
+		640239122C69F64000DA19C6 /* AnswerTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640239112C69F64000DA19C6 /* AnswerTextCell.swift */; };
+		640239142C69FBA400DA19C6 /* AutoLayoutGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */; };
 		640953F92C4E16940071FBBA /* db_model_v1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 640953F72C4E16940071FBBA /* db_model_v1.xcdatamodeld */; };
 		640953FC2C4E1EEC0071FBBA /* Dictionary+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640953FB2C4E1EEC0071FBBA /* Dictionary+Json.swift */; };
 		643C32662C17E17C00B60246 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32652C17E17C00B60246 /* MainView.swift */; };
@@ -50,7 +52,6 @@
 		64753CFD2C624A9D00B8F8AF /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CF92C624A9D00B8F8AF /* PracticeView.swift */; };
 		64753CFE2C624A9D00B8F8AF /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CFA2C624A9D00B8F8AF /* CellModel.swift */; };
 		64753CFF2C624A9D00B8F8AF /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CFB2C624A9D00B8F8AF /* TextCell.swift */; };
-		64753D002C624A9D00B8F8AF /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CFC2C624A9D00B8F8AF /* RectangleView.swift */; };
 		64753D052C626A4E00B8F8AF /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753D042C626A4E00B8F8AF /* TextStyle.swift */; };
 		64753D072C626A8B00B8F8AF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753D062C626A8B00B8F8AF /* Font.swift */; };
 		64753D092C626AEC00B8F8AF /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753D082C626AEC00B8F8AF /* AttributedString.swift */; };
@@ -99,6 +100,8 @@
 
 /* Begin PBXFileReference section */
 		6402390F2C69CAD900DA19C6 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		640239112C69F64000DA19C6 /* AnswerTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTextCell.swift; sourceTree = "<group>"; };
+		640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayoutGrid.swift; sourceTree = "<group>"; };
 		640953F82C4E16940071FBBA /* db_model_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db_model_v1.xcdatamodel; sourceTree = "<group>"; };
 		640953FB2C4E1EEC0071FBBA /* Dictionary+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Json.swift"; sourceTree = "<group>"; };
 		643C32652C17E17C00B60246 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -140,7 +143,6 @@
 		64753CF92C624A9D00B8F8AF /* PracticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
 		64753CFA2C624A9D00B8F8AF /* CellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		64753CFB2C624A9D00B8F8AF /* TextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
-		64753CFC2C624A9D00B8F8AF /* RectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
 		64753D042C626A4E00B8F8AF /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 		64753D062C626A8B00B8F8AF /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		64753D082C626AEC00B8F8AF /* AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedString.swift; sourceTree = "<group>"; };
@@ -264,8 +266,9 @@
 			children = (
 				64753CFA2C624A9D00B8F8AF /* CellModel.swift */,
 				64753CF92C624A9D00B8F8AF /* PracticeView.swift */,
-				64753CFC2C624A9D00B8F8AF /* RectangleView.swift */,
+				640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */,
 				64753CFB2C624A9D00B8F8AF /* TextCell.swift */,
+				640239112C69F64000DA19C6 /* AnswerTextCell.swift */,
 				6402390F2C69CAD900DA19C6 /* WeatherView.swift */,
 			);
 			path = Practice;
@@ -671,6 +674,7 @@
 				6492DDA92C1934A80054FE06 /* SubSheetView.swift in Sources */,
 				64E09DEF2C09C4D600D763D9 /* ContentView.swift in Sources */,
 				6492D4482C1B2DC40050F7E7 /* Loadable.swift in Sources */,
+				640239122C69F64000DA19C6 /* AnswerTextCell.swift in Sources */,
 				640953F92C4E16940071FBBA /* db_model_v1.xcdatamodeld in Sources */,
 				6492DDAD2C194B7D0054FE06 /* SettingView.swift in Sources */,
 				647481432C4B4C8E0034CB8A /* CoreDataHelpers.swift in Sources */,
@@ -689,7 +693,6 @@
 				6474814C2C4B60DB0034CB8A /* BaseView.swift in Sources */,
 				64753CFD2C624A9D00B8F8AF /* PracticeView.swift in Sources */,
 				64753D182C626FF000B8F8AF /* String+Range.swift in Sources */,
-				64753D002C624A9D00B8F8AF /* RectangleView.swift in Sources */,
 				64E09E002C09C57B00D763D9 /* LoginView.swift in Sources */,
 				64753CF62C624A8D00B8F8AF /* HomeView.swift in Sources */,
 				647481372C4B4BC40034CB8A /* LessonDBRepository.swift in Sources */,
@@ -709,6 +712,7 @@
 				647481452C4B51EC0034CB8A /* LessonMO.swift in Sources */,
 				6484BB6E2C1A861B00B1D158 /* Publisher+WeakAssign.swift in Sources */,
 				647481342C4B44AA0034CB8A /* PushNotificationsHandler.swift in Sources */,
+				640239142C69FBA400DA19C6 /* AutoLayoutGrid.swift in Sources */,
 				64EFDFDB2C0FF57600EBA864 /* CancelBag.swift in Sources */,
 				6484BB742C1AA0E600B1D158 /* ProfileDetailView.swift in Sources */,
 				6461E37E2C61E87300ABA306 /* PracticeModel.swift in Sources */,
