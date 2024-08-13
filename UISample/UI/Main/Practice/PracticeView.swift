@@ -40,6 +40,7 @@ struct PracticeView: View {
     @State private var gridHeight: CGFloat = 0
 
     @State private var alignmentGuides = [AnyHashable: CGPoint]()
+
     
     var body: some View {
         
@@ -61,56 +62,21 @@ struct PracticeView: View {
     
     var content: some View {
         VStack {
-            AutoLayoutGrid(viewModel.textCellVMlist) { vm in
-                TextCell(viewModel: vm)
+            AutoLayoutGrid(viewModel.textCellVMlist) { data in
+                TextCell(viewModel: data)
             }
-            .border(.appBlue600)
+            .padding(.bottom, 100)
             
-            AutoLayoutGrid(viewModel.answerCellVMList) { vm in
-                AnswerTextCell(viewModel: vm)
+            AutoLayoutGrid(viewModel.answerCellVMList) { data in
+                let cell = ButtonCell(viewModel: data)
+                if cell.isMoved {
+                    cell.
+                }
+                return TextCellContainer(textCell: cell)
             }
-            .border(.appRedOrange300)
             
             Spacer()
         }
-    }
-    
-    private func sentenceView() -> some View {
-        ZStack(alignment: .topLeading) {
-            ForEach(viewModel.textCellVMlist, id: \.id) { cellVM in
-                TextCell(viewModel: cellVM)
-                    .background(PreferenceSetter(id: cellVM.id))
-                    .alignmentGuide(.top) { d in
-                        self.alignmentGuides[cellVM.id]?.y ?? 0
-                    }
-                    .alignmentGuide(.leading) { d in
-                        self.alignmentGuides[cellVM.id]?.x ?? 0
-                    }
-                    //.opacity(self.alignmentGuides[cellVM.id] != nil ? 1 : 0)
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
-        .border(.green)
-    }
-    
-    private func answersView() -> some View {
-        ZStack(alignment: .topLeading) {
-            ForEach(viewModel.answerCellVMList, id: \.id) { cellVM in
-                AnswerTextCell(viewModel: cellVM)
-                    .background(PreferenceSetter(id: cellVM.id))
-                    .alignmentGuide(.top) { d in
-                        self.alignmentGuides[cellVM.id]?.y ?? 0
-                    }
-                    .alignmentGuide(.leading) { d in
-                        self.alignmentGuides[cellVM.id]?.x ?? 0
-                    }
-                    //.opacity(self.alignmentGuides[cellVM.id] != nil ? 1 : 0)
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
-        .border(.green)
     }
 }
 
@@ -151,10 +117,10 @@ extension PracticeView {
         
         @Published var textCellVMlist: [TextCell.ViewModel] = []
         
-        @Published var answerCellVMList: [AnswerTextCell.ViewModel] = []
+        @Published var answerCellVMList: [ButtonCell.ViewModel] = []
         
         func fetch() {
-            let text = "SwiftUI is a modern framework ______ introdu by Apple for building user interfaces"
+            let text = "SwiftUI is a modern framework _ introdu by Apple for building user interfaces"
             let components = text.components(separatedBy: .whitespaces)
             
             var dict: [AnyHashable : TextCell.ViewModel] = [:]
@@ -175,12 +141,12 @@ extension PracticeView {
         func fetchAnswers() {
             let components = ["Correct", "Dummy1", "Dummy2", "Dummy3"]
             
-            var dict: [AnyHashable : AnswerTextCell.ViewModel] = [:]
-            var list: [AnswerTextCell.ViewModel] = []
+            var dict: [AnyHashable : ButtonCell.ViewModel] = [:]
+            var list: [ButtonCell.ViewModel] = []
             let count = components.count
             for i in 0 ..< count {
                 let component = components[i]
-                let cellVM = AnswerTextCell.ViewModel(container: container)
+                let cellVM = ButtonCell.ViewModel(container: container)
                 cellVM.text = component
                 cellVM.index = i
                 dict[cellVM.id] = cellVM

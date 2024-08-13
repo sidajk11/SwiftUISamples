@@ -2,11 +2,10 @@
 //  TextCell.swift
 //  UISample
 //
-//  Created by 정영민 on 2024/08/06.
+//  Created by 정영민 on 2024/08/13.
 //
 
 import SwiftUI
-
 
 struct TextCell: View {
     let viewModel: ViewModel
@@ -21,17 +20,26 @@ struct TextCell: View {
             .readSize { size in
                 print("\(viewModel.text) \(size.width)")
             }
+            .frame(width: viewModel.text == "_" ? 100 : nil, height: 40)
+            .overlay(
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundColor(.blue)
+                    .offset(y: 0) // 텍스트 아래로 밑줄을 이동
+                , alignment: .bottom
+            )
     }
     
     var content: some View {
         Button {
             print(viewModel.text)
         } label: {
-            Text(viewModel.text)
+            Text(viewModel.text == "_" ? "" : viewModel.text)
                 .font(.body1)
                 .padding(EdgeInsets(top: 0, leading: padding, bottom: 0, trailing: padding))
         }
         .buttonStyle(.plain)
+        .padding(4)
     }
 }
 
