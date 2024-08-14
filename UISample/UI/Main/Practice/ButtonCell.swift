@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ButtonCell: View {
-    let viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
     
     private let padding: CGFloat = 0
     
-    @State var isMoved: Bool = false
+    var isUpdated = PassthroughSubject<Void, Never>()
     
-    @State private var viewOffset = CGSize.zero
-    @State private var lastDragPosition = CGSize.zero
+    @State var isMoved: Bool = false
+    @State private var lastDragPosition = CGPoint.zero
     
     var body: some View {
         content
@@ -32,6 +33,7 @@ struct ButtonCell: View {
             Button {
                 print(viewModel.text)
                 isMoved.toggle()
+                isUpdated.send()
             } label: {
                 Text(viewModel.text)
                     .font(.subtitle1)
@@ -40,15 +42,15 @@ struct ButtonCell: View {
             .buttonStyle(.plain)
             .clipShape(.rect(cornerRadii: .init(topLeading: 2, bottomLeading: 2, bottomTrailing: 2, topTrailing: 2)))
             .padding(4)
-            .offset(x: viewOffset.width, y: viewOffset.height)
+            .offset(x: viewModel.viewOffset.x, y: viewModel.viewOffset.y)
             .simultaneousGesture(
                 DragGesture()
                     .onChanged { value in
-                        viewOffset = CGSize(width: lastDragPosition.width + value.translation.width,
-                                            height: lastDragPosition.height + value.translation.height)
+                        viewModel.viewOffset = CGPoint(x: lastDragPosition.x + value.translation.width,
+                                            y: lastDragPosition.y + value.translation.height)
                     }
                     .onEnded { value in
-                        lastDragPosition = viewOffset
+                        lastDragPosition = viewModel.viewOffset
                     }
             )
         }
@@ -60,6 +62,7 @@ extension ButtonCell {
         var text: String = ""
         var index: Int = 0
         @State private var isMoved = false
+        @Published var viewOffset = CGPoint.zero
         
         func onAppear() {
         }

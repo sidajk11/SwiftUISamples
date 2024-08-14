@@ -32,7 +32,7 @@ struct PracticeView: View {
     @ObservedObject var viewModel: ViewModel
     
     @State private var geometrySize: CGSize = .zero
-    @State private var preferences: [ElementPreferenceData] = []
+    @State private var preferences: [PreferenceSizeData] = []
     
     private let horizontalSpacing: CGFloat = 10
     private let horizontalPadding: CGFloat = 12
@@ -40,6 +40,10 @@ struct PracticeView: View {
     @State private var gridHeight: CGFloat = 0
 
     @State private var alignmentGuides = [AnyHashable: CGPoint]()
+    
+    var spacePositions: [CGPoint] = []
+    
+    let cancelBag = CancelBag()
 
     
     var body: some View {
@@ -64,16 +68,23 @@ struct PracticeView: View {
         VStack {
             AutoLayoutGrid(viewModel.textCellVMlist) { data in
                 TextCell(viewModel: data)
+                    .readFrameInGlobal { frame in
+                        data.frame = frame
+                    }
             }
             .padding(.bottom, 100)
             
             AutoLayoutGrid(viewModel.answerCellVMList) { data in
                 let cell = ButtonCell(viewModel: data)
-                if cell.isMoved {
-                    cell.
-                }
+                
+                cell.isUpdated.sink { () in
+                    let position = viewModel.firstSpacePosition()
+                    
+                    data.viewOffset = position
+                }.store(in: cancelBag)
                 return TextCellContainer(textCell: cell)
             }
+            .animation(.default, value: UUID())
             
             Spacer()
         }
@@ -118,6 +129,16 @@ extension PracticeView {
         @Published var textCellVMlist: [TextCell.ViewModel] = []
         
         @Published var answerCellVMList: [ButtonCell.ViewModel] = []
+        
+        func firstSpacePosition() -> CGPoint {
+            let frame = textCellVMlist.first(where: { $0.text == "_" })?.frame
+            var position: CGPoint = .zero
+            if let frame = frame {
+                position.x = frame.midX
+                position.y = frame.midY
+            }
+            return position
+        }
         
         func fetch() {
             let text = "SwiftUI is a modern framework _ introdu by Apple for building user interfaces"

@@ -19,23 +19,38 @@ extension View {
     }
 }
 
+extension View {
+    func readFrameInGlobal(onChange: @escaping (CGRect) -> Void) -> some View {
+        background(
+            GeometryReader { geometryProxy in
+                Color.clear
+                    .preference(key: GlobleFramePreferenceKey.self, value: geometryProxy.frame(in: .global))
+            }
+        )
+        .onPreferenceChange(GlobleFramePreferenceKey.self, perform: onChange)
+    }
+}
+
+
 struct SizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
 }
 
+struct GlobleFramePreferenceKey: PreferenceKey {
+    static var defaultValue: CGRect = .zero
+    static func reduce(value: inout CGRect, nextValue: () -> CGRect) {}
+}
 
-struct ElementPreferenceData: Equatable {
+struct PreferenceSizeData: Equatable {
     let id: AnyHashable
     let size: CGSize
 }
 
 struct ElementPreferenceKey: PreferenceKey {
-    typealias Value = [ElementPreferenceData]
+    static var defaultValue: [PreferenceSizeData] = []
 
-    static var defaultValue: [ElementPreferenceData] = []
-
-    static func reduce(value: inout [ElementPreferenceData], nextValue: () -> [ElementPreferenceData]) {
+    static func reduce(value: inout [PreferenceSizeData], nextValue: () -> [PreferenceSizeData]) {
         value.append(contentsOf: nextValue())
     }
 }
@@ -45,7 +60,7 @@ struct PreferenceSetter<ID: Hashable>: View {
     var body: some View {
         GeometryReader { geometry in
             Color.clear
-                .preference(key: ElementPreferenceKey.self, value: [ElementPreferenceData(id: AnyHashable(self.id), size: geometry.size)])
+                .preference(key: ElementPreferenceKey.self, value: [PreferenceSizeData(id: AnyHashable(self.id), size: geometry.size)])
         }
     }
 }

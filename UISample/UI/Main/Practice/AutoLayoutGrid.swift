@@ -16,7 +16,7 @@ struct AutoLayoutGrid<Data, ID, Content>: View where Data : RandomAccessCollecti
     var animation: Animation? = nil
     
     @State private var geometrySize: CGSize = .zero
-    @State private var preferences: [ElementPreferenceData] = []
+    @State private var preferences: [PreferenceSizeData] = []
     
     private let horizontalSpacing: CGFloat = 10
     private let horizontalPadding: CGFloat = 12
@@ -25,7 +25,9 @@ struct AutoLayoutGrid<Data, ID, Content>: View where Data : RandomAccessCollecti
     @State private var gridHeight: CGFloat = 0
 
     @State private var alignmentGuides = [AnyHashable: CGPoint]() {
-        didSet { loaded = !oldValue.isEmpty }
+        didSet {
+            loaded = !oldValue.isEmpty
+        }
     }
     
     var body: some View {
