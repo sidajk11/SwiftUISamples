@@ -84,7 +84,7 @@ struct PracticeView: View {
                 }.store(in: cancelBag)
                 return TextCellContainer(textCell: cell)
             }
-            .animation(.default, value: UUID())
+            //.animation(.default, value: UUID())
             
             Spacer()
         }
