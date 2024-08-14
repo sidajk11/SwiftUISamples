@@ -47,6 +47,7 @@ extension TextCell {
     class ViewModel: BaseViewModel {
         var text: String = ""
         var index: Int = 0
+        var frame: CGRect = .zero
         
         func onAppear() {
         }
