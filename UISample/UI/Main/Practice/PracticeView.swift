@@ -77,14 +77,18 @@ struct PracticeView: View {
             AutoLayoutGrid(viewModel.answerCellVMList) { data in
                 let cell = ButtonCell(viewModel: data)
                 
-                cell.isUpdated.sink { () in
+                data.isUpdated.sink { () in
                     let position = viewModel.firstSpacePosition()
-                    
-                    data.viewOffset = position
+                    if data.isMoved {
+                        data.viewOffsetInGlobal = position
+                    } else {
+                        data.viewOffset = .zero
+                        data.lastDragPosition = .zero
+                    }
                 }.store(in: cancelBag)
                 return TextCellContainer(textCell: cell)
             }
-            //.animation(.default, value: UUID())
+            .animation(.default, value: UUID())
             
             Spacer()
         }
