@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ToastView: View {
     
-    @State var size: CGSize = .zero
+    @State var size: CGSize?
     
     var body: some View {
         ZStack() {
@@ -17,18 +17,19 @@ struct ToastView: View {
                 Image(.Common.Toast.checkbox)
                     .padding(.top, 10)
                 Text("정답!")
-                    .foregroundStyle(.appGray600)
-                    .padding(.horizontal, 40)
+                    .foregroundColor(.appGray600)
+                    .padding(.horizontal, 10)
                     .padding(.bottom, 20)
             }
-            .background(.appGray200)
-            .cornerRadius(8)
             .padding(10)
             .readSize { size in
                 self.size = CGSize(width: size.width, height: size.width)
             }
         }
-        .frame(width: size.width, height: size.width)
+        .frame(width: size?.width, height: size?.width)
+        .frame(minWidth: 120, minHeight: 120)
+        .background(.appGray200)
+        .cornerRadius(8)
     }
 }
 
