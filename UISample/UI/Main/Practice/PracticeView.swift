@@ -45,6 +45,7 @@ struct PracticeView: View {
     
     let cancelBag = CancelBag()
 
+    @State private var isShowAlert: Bool = false
     
     var body: some View {
         
@@ -61,7 +62,17 @@ struct PracticeView: View {
                         }
                     }
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    
+                    Button {
+                        isShowAlert.toggle()
+                    } label: {
+                        Text("Alert")
+                    }
+
+                }
             }
+            .toastView(isShow: $viewModel.isShowToast)
     }
     
     var content: some View {
@@ -69,7 +80,7 @@ struct PracticeView: View {
             AutoLayoutGrid(viewModel.textCellVMlist) { data in
                 TextCell(viewModel: data)
                     .readFrameInGlobal { frame in
-                        data.frame = frame
+                        data.frameInGlobal = frame
                     }
             }
             .padding(.bottom, 100)
@@ -77,15 +88,21 @@ struct PracticeView: View {
             AutoLayoutGrid(viewModel.answerCellVMList) { data in
                 let cell = ButtonCell(viewModel: data)
                 
-                data.isUpdated.sink { () in
+                data.action = {
                     let position = viewModel.firstSpacePosition()
                     if data.isMoved {
-                        data.viewOffsetInGlobal = position
+                        if viewModel.answer.isEmpty {
+                            data.viewOffsetInGlobal = position
+                            viewModel.answer = data.text
+                        }
+                        else {
+                            data.isMoved = false
+                        }
                     } else {
                         data.viewOffset = .zero
-                        data.lastDragPosition = .zero
+                        viewModel.answer = ""
                     }
-                }.store(in: cancelBag)
+                }
                 return TextCellContainer(textCell: cell)
             }
             .animation(.default, value: UUID())
@@ -134,8 +151,24 @@ extension PracticeView {
         
         @Published var answerCellVMList: [ButtonCell.ViewModel] = []
         
+        var answer: String = "" {
+            didSet {
+                if !answer.isEmpty {
+                    isShowToast = answer == correctAnswer
+                } else {
+                    isShowToast = false
+                }
+            }
+        }
+        
+        @Published var isShowToast: Bool = false
+        
+        var content: String = "That is a _ restaurant."
+        var correctAnswer: String = "famous"
+        var options: [String] = ["very", "famous", "thanks", "wallet"]
+        
         func firstSpacePosition() -> CGPoint {
-            let frame = textCellVMlist.first(where: { $0.text == "_" })?.frame
+            let frame = textCellVMlist.first(where: { $0.text == "_" })?.frameInGlobal
             var position: CGPoint = .zero
             if let frame = frame {
                 position.x = frame.midX
@@ -145,8 +178,7 @@ extension PracticeView {
         }
         
         func fetch() {
-            let text = "SwiftUI is a modern framework _ introdu by Apple for building user interfaces"
-            let components = text.components(separatedBy: .whitespaces)
+            let components = content.components(separatedBy: .whitespaces)
             
             var dict: [AnyHashable : TextCell.ViewModel] = [:]
             var list: [TextCell.ViewModel] = []
@@ -164,13 +196,11 @@ extension PracticeView {
         }
         
         func fetchAnswers() {
-            let components = ["Correct", "Dummy1", "Dummy2", "Dummy3"]
-            
             var dict: [AnyHashable : ButtonCell.ViewModel] = [:]
             var list: [ButtonCell.ViewModel] = []
-            let count = components.count
+            let count = options.count
             for i in 0 ..< count {
-                let component = components[i]
+                let component = options[i]
                 let cellVM = ButtonCell.ViewModel(container: container)
                 cellVM.text = component
                 cellVM.index = i

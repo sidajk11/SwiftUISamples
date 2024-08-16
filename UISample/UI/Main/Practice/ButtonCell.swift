@@ -28,7 +28,7 @@ struct ButtonCell: View {
             Button {
                 print(viewModel.text)
                 viewModel.isMoved.toggle()
-                viewModel.isUpdated.send()
+                viewModel.action?()
             } label: {
                 Text(viewModel.text)
                     .font(.subtitle1)
@@ -36,15 +36,15 @@ struct ButtonCell: View {
             }
             .buttonStyle(.plain)
             .padding(4)
-            .offset(x: viewModel.viewOffset.x, y: viewModel.viewOffset.y)
+            .offset(x: viewModel.viewOffset.x + viewModel.translation.width, y: viewModel.viewOffset.y + viewModel.translation.height)
             .simultaneousGesture(
-                DragGesture(coordinateSpace: .global)
+                DragGesture()
                     .onChanged { value in
-                        viewModel.viewOffset = CGPoint(x: viewModel.lastDragPosition.x + value.translation.width,
-                                                       y: viewModel.lastDragPosition.y + value.translation.height)
+                        viewModel.translation = value.translation
                     }
                     .onEnded { value in
-                        viewModel.lastDragPosition = CGPoint(x: viewModel.viewOffset.x, y: viewModel.viewOffset.y)
+                        viewModel.translation = .zero
+                        viewModel.viewOffset = CGPoint(x: viewModel.viewOffset.x + viewModel.translation.width, y: viewModel.viewOffset.y + viewModel.translation.height)
                     }
             )
             .readFrameInGlobal { frame in
@@ -59,20 +59,19 @@ extension ButtonCell {
         var text: String = ""
         var index: Int = 0
         
+        var action: Callback?
+        
         @Published var viewOffset = CGPoint.zero
         @Published var isMoved: Bool = false
-        @Published var lastDragPosition = CGPoint.zero
+        @Published var translation: CGSize = .zero
         
         @Published var frameInGlobal: CGRect = .zero
         @Published var viewOffsetInGlobal: CGPoint = .zero {
             didSet {
                 viewOffset = CGPoint(x: viewOffsetInGlobal.x - frameInGlobal.minX - frameInGlobal.width / 2,
                                      y: viewOffsetInGlobal.y - frameInGlobal.minY - frameInGlobal.height / 2)
-                lastDragPosition = viewOffset
             }
         }
-        
-        var isUpdated = PassthroughSubject<Void, Never>()
         
         func onAppear() {
         }
