@@ -76,7 +76,7 @@ struct PracticeView: View {
     }
     
     var content: some View {
-        VStack {
+        VStack(alignment: .leading) {
             AutoLayoutGrid(viewModel.textCellVMlist) { data in
                 TextCell(viewModel: data)
                     .readFrameInGlobal { frame in
@@ -105,7 +105,7 @@ struct PracticeView: View {
                 }
                 return TextCellContainer(textCell: cell)
             }
-            .animation(.default, value: UUID())
+            .animation(.easeInOut(duration: 0.2), value: UUID())
             
             Spacer()
         }
@@ -163,7 +163,7 @@ extension PracticeView {
         
         @Published var isShowToast: Bool = false
         
-        var content: String = "That is a _ restaurant."
+        var content: String = "That is a _ "//"That is a _ restaurant."
         var correctAnswer: String = "famous"
         var options: [String] = ["very", "famous", "thanks", "wallet"]
         

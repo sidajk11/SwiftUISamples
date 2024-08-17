@@ -15,7 +15,7 @@ struct ToastView: View {
         ZStack() {
             VStack {
                 Image(.Common.Toast.checkbox)
-                    .padding(.top, 10)
+                    .padding(.top, 20)
                 Text("정답!")
                     .foregroundColor(.appGray600)
                     .padding(.horizontal, 10)

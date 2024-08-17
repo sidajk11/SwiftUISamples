@@ -70,6 +70,7 @@
 		6484BB772C1AA1D300B1D158 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB762C1AA1D300B1D158 /* CloseButton.swift */; };
 		6484BB7A2C1AD0C600B1D158 /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB792C1AD0C600B1D158 /* APICall.swift */; };
 		6484BB7C2C1AD17F00B1D158 /* WebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6484BB7B2C1AD17F00B1D158 /* WebRepository.swift */; };
+		6491EE322C702B7F00BA9955 /* CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6491EE312C702B7F00BA9955 /* CGRect.swift */; };
 		6492D4462C1B2D970050F7E7 /* NetworkingHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492D4452C1B2D970050F7E7 /* NetworkingHelpers.swift */; };
 		6492D4482C1B2DC40050F7E7 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492D4472C1B2DC40050F7E7 /* Loadable.swift */; };
 		6492D44A2C1B2E960050F7E7 /* MultipartFormCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6492D4492C1B2E960050F7E7 /* MultipartFormCreator.swift */; };
@@ -169,6 +170,7 @@
 		6484BB762C1AA1D300B1D158 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		6484BB792C1AD0C600B1D158 /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		6484BB7B2C1AD17F00B1D158 /* WebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRepository.swift; sourceTree = "<group>"; };
+		6491EE312C702B7F00BA9955 /* CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRect.swift; sourceTree = "<group>"; };
 		6492D4452C1B2D970050F7E7 /* NetworkingHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingHelpers.swift; sourceTree = "<group>"; };
 		6492D4472C1B2DC40050F7E7 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		6492D4492C1B2E960050F7E7 /* MultipartFormCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartFormCreator.swift; sourceTree = "<group>"; };
@@ -280,13 +282,11 @@
 		645B5A752C60CC6300FB3C7D /* Practice */ = {
 			isa = PBXGroup;
 			children = (
+				6491EE332C70302000BA9955 /* Cells */,
 				64753CFA2C624A9D00B8F8AF /* CellModel.swift */,
 				64753CF92C624A9D00B8F8AF /* PracticeView.swift */,
 				640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */,
-				64753CFB2C624A9D00B8F8AF /* TextCellContainer.swift */,
-				64A872802C6B23F10017A799 /* TextCell.swift */,
 				64A8727E2C6B22570017A799 /* TextCellContentType.swift */,
-				640239112C69F64000DA19C6 /* ButtonCell.swift */,
 				64B28D722C6F12D9005A50BB /* ToastView.swift */,
 				64B28D742C6F187F005A50BB /* ToastModifier.swift */,
 				64B28D782C6F43D4005A50BB /* FadeTransition.swift */,
@@ -406,6 +406,7 @@
 		64753D022C626A2C00B8F8AF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6491EE302C702B7300BA9955 /* CGRect */,
 				645C3AF22C63070100BD9156 /* View */,
 				64753D122C626FF000B8F8AF /* String */,
 			);
@@ -454,6 +455,24 @@
 				646706AF2C31249B008DB9E3 /* Request.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		6491EE302C702B7300BA9955 /* CGRect */ = {
+			isa = PBXGroup;
+			children = (
+				6491EE312C702B7F00BA9955 /* CGRect.swift */,
+			);
+			path = CGRect;
+			sourceTree = "<group>";
+		};
+		6491EE332C70302000BA9955 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				64A872802C6B23F10017A799 /* TextCell.swift */,
+				64753CFB2C624A9D00B8F8AF /* TextCellContainer.swift */,
+				640239112C69F64000DA19C6 /* ButtonCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		649DEE3E2C5B4F5000E9D504 /* Home */ = {
@@ -703,6 +722,7 @@
 				645B762F2C53903C0052647B /* TestView.swift in Sources */,
 				6492D4462C1B2D970050F7E7 /* NetworkingHelpers.swift in Sources */,
 				647481272C4B3EAA0034CB8A /* DIContainer.swift in Sources */,
+				6491EE322C702B7F00BA9955 /* CGRect.swift in Sources */,
 				64753D172C626FF000B8F8AF /* String+Localized.swift in Sources */,
 				6484BB6C2C1A7DC600B1D158 /* CellConfigurator.swift in Sources */,
 				6492DDA92C1934A80054FE06 /* SubSheetView.swift in Sources */,

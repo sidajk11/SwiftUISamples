@@ -31,16 +31,16 @@ struct AutoLayoutGrid<Data, ID, Content>: View where Data : RandomAccessCollecti
     }
     
     var body: some View {
-        VStack {
-            GeometryReader { geometry in
-                self.grid()
-                    .onPreferenceChange(ElementPreferenceKey.self, perform: { preferences in
-                        self.preferences = preferences
-                        layout()
-                    })
-            }
+        ZStack(alignment: .leading) {
+            self.grid()
+                .onPreferenceChange(ElementPreferenceKey.self, perform: { preferences in
+                    self.preferences = preferences
+                    layout()
+                })
+            .background(.red)
         }
         .frame(width: nil, height: gridHeight)
+        .frame(maxWidth: .infinity, maxHeight: nil)
         .readSize(onChange: { size in
             geometrySize = size
             layout()

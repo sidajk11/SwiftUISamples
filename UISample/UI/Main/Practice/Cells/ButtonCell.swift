@@ -11,15 +11,12 @@ import Combine
 struct ButtonCell: View {
     @StateObject var viewModel: ViewModel
     
-    private let padding: CGFloat = 0
+    private let padding: CGFloat = 10
     
     var body: some View {
         content
             .onAppear {
                 self.viewModel.onAppear()
-            }
-            .readSize { size in
-                print("\(viewModel.text) \(size.width)")
             }
     }
     
@@ -32,10 +29,12 @@ struct ButtonCell: View {
             } label: {
                 Text(viewModel.text)
                     .font(.subtitle1)
-                    .padding(EdgeInsets(top: 0, leading: padding, bottom: 0, trailing: padding))
+                    .padding(EdgeInsets(top: 4, leading: padding, bottom: 4, trailing: padding))
+                    .background(.appGray200)
+                    .cornerRadius(12)
             }
             .buttonStyle(.plain)
-            .padding(4)
+            
             .offset(x: viewModel.viewOffset.x + viewModel.translation.width, y: viewModel.viewOffset.y + viewModel.translation.height)
             .simultaneousGesture(
                 DragGesture()
