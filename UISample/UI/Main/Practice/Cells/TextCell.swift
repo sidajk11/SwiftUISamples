@@ -33,6 +33,7 @@ struct TextCell: View {
     var content: some View {
         Button {
             print(viewModel.text)
+            viewModel.action?()
         } label: {
             Text(viewModel.text == "_" ? "" : viewModel.text)
                 .font(.body1)
@@ -47,6 +48,9 @@ extension TextCell {
     class ViewModel: BaseViewModel {
         var text: String = ""
         var index: Int = 0
+        
+        var action: Callback?
+        
         var frameInGlobal: CGRect = .zero
         
         func onAppear() {

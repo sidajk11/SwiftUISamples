@@ -11,6 +11,9 @@
 		640239142C69FBA400DA19C6 /* AutoLayoutGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */; };
 		640953F92C4E16940071FBBA /* db_model_v1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 640953F72C4E16940071FBBA /* db_model_v1.xcdatamodeld */; };
 		640953FC2C4E1EEC0071FBBA /* Dictionary+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640953FB2C4E1EEC0071FBBA /* Dictionary+Json.swift */; };
+		6438CB582C72D13300F2C098 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438CB572C72D13300F2C098 /* WeatherView.swift */; };
+		6438CB5A2C7311AE00F2C098 /* TranslationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438CB592C7311AE00F2C098 /* TranslationPopup.swift */; };
+		6438CB5C2C73347F00F2C098 /* LayoutTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438CB5B2C73347F00F2C098 /* LayoutTestView.swift */; };
 		643C32662C17E17C00B60246 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32652C17E17C00B60246 /* MainView.swift */; };
 		643C32692C17E1AE00B60246 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32682C17E1AE00B60246 /* Router.swift */; };
 		643C326B2C18068200B60246 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C326A2C18068200B60246 /* AppDelegate.swift */; };
@@ -112,6 +115,9 @@
 		640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayoutGrid.swift; sourceTree = "<group>"; };
 		640953F82C4E16940071FBBA /* db_model_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db_model_v1.xcdatamodel; sourceTree = "<group>"; };
 		640953FB2C4E1EEC0071FBBA /* Dictionary+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Json.swift"; sourceTree = "<group>"; };
+		6438CB572C72D13300F2C098 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		6438CB592C7311AE00F2C098 /* TranslationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationPopup.swift; sourceTree = "<group>"; };
+		6438CB5B2C73347F00F2C098 /* LayoutTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTestView.swift; sourceTree = "<group>"; };
 		643C32652C17E17C00B60246 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		643C32682C17E1AE00B60246 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		643C326A2C18068200B60246 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -290,6 +296,8 @@
 				64B28D722C6F12D9005A50BB /* ToastView.swift */,
 				64B28D742C6F187F005A50BB /* ToastModifier.swift */,
 				64B28D782C6F43D4005A50BB /* FadeTransition.swift */,
+				6438CB572C72D13300F2C098 /* WeatherView.swift */,
+				6438CB592C7311AE00F2C098 /* TranslationPopup.swift */,
 			);
 			path = Practice;
 			sourceTree = "<group>";
@@ -530,6 +538,7 @@
 			children = (
 				643C32652C17E17C00B60246 /* MainView.swift */,
 				645B762E2C53903C0052647B /* TestView.swift */,
+				6438CB5B2C73347F00F2C098 /* LayoutTestView.swift */,
 				645B5A752C60CC6300FB3C7D /* Practice */,
 			);
 			path = Main;
@@ -698,6 +707,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64753D052C626A4E00B8F8AF /* TextStyle.swift in Sources */,
+				6438CB5C2C73347F00F2C098 /* LayoutTestView.swift in Sources */,
 				64E09DF62C09C4D800D763D9 /* Persistence.swift in Sources */,
 				64753CF72C624A8D00B8F8AF /* LessonCell.swift in Sources */,
 				6474813A2C4B4C2A0034CB8A /* CoreDataStack.swift in Sources */,
@@ -742,6 +752,7 @@
 				6474812D2C4B3FA00034CB8A /* UserPermissionsService.swift in Sources */,
 				6492DDA72C19347C0054FE06 /* PresentingView.swift in Sources */,
 				6474813D2C4B4C3F0034CB8A /* Helpers.swift in Sources */,
+				6438CB582C72D13300F2C098 /* WeatherView.swift in Sources */,
 				6484BB702C1A9F1F00B1D158 /* ProfileView.swift in Sources */,
 				646706BB2C312E42008DB9E3 /* ItemService.swift in Sources */,
 				6474814A2C4B606A0034CB8A /* BaseViewModel.swift in Sources */,
@@ -780,6 +791,7 @@
 				64753D072C626A8B00B8F8AF /* Font.swift in Sources */,
 				647481292C4B3ED90034CB8A /* Store.swift in Sources */,
 				6484BB772C1AA1D300B1D158 /* CloseButton.swift in Sources */,
+				6438CB5A2C7311AE00F2C098 /* TranslationPopup.swift in Sources */,
 				64A8727F2C6B22570017A799 /* TextCellContentType.swift in Sources */,
 				643C326B2C18068200B60246 /* AppDelegate.swift in Sources */,
 				6474812B2C4B3EF20034CB8A /* AppState.swift in Sources */,
@@ -932,7 +944,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -962,7 +974,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

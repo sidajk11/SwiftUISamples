@@ -31,6 +31,7 @@ class PresentRouter<T: Routable>: ObservableObject {
     
     @Published public var sheet: T?
     @Published public var fullScreen: T?
+    @Published public var popup: T?
     
     func sheet(route: T) {
         sheet = route
@@ -38,5 +39,9 @@ class PresentRouter<T: Routable>: ObservableObject {
     
     func fullScreenCover(route: T) {
         fullScreen = route
+    }
+    
+    func popup(route: T) {
+        popup = route
     }
 }

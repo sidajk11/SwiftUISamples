@@ -53,7 +53,7 @@ struct MainView: View {
                     }
                 .tag(0)
 
-            SettingView()
+            TestView(viewModel: .init(container: viewModel.container))
                 .tabItem {
                     Label("Progress", systemImage: "chart.bar.fill")
                 }
