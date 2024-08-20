@@ -75,6 +75,7 @@ struct PracticeView: View {
                 .popover(item: $presentRouter.popup, attachmentAnchor: .rect(.bounds)) { route in
                     self.routing(for: route)
                 }
+                .border(.red)
             
             content
                 .navigationTitle("Practice")

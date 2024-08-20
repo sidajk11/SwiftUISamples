@@ -9,17 +9,36 @@ import SwiftUI
 
 struct LayoutTestView: View {
     var body: some View {
-        Rectangle()
+            Rectangle()
             .foregroundStyle(.appGray300)
-            .overlay(content)
+            .overlay(contentAlignmentGuide)
         //content
+    }
+    
+    var contentAlignmentGuide: some View {
+        ZStack() {
+            Rectangle()
+                .foregroundStyle(.appBlue500)
+                .frame(width: 50, height: 50)
+                .alignmentGuide(VerticalAlignment.center, computeValue: { dimension in
+                    25+150
+                })
+                .alignmentGuide(HorizontalAlignment.center, computeValue: { dimension in
+                    25
+                })
+            
+            Rectangle()
+                .foregroundStyle(.appBlue500)
+                .frame(width: 200, height: 200)
+                .offset(x: 200, y: 200)
+        }
+        .border(.green)
     }
     
     var content: some View {
         ZStack(alignment: .center) {
             Rectangle()
-                .fill(.red)
-                .foregroundStyle(.red)
+                .foregroundStyle(.appBlue500)
             //.position(popoverFrame.origin)
             //.frame(width: popoverFrame.width, height: popoverFrame.height)
 //                .offset(CGSize(width: 10, height: 0))
@@ -28,13 +47,15 @@ struct LayoutTestView: View {
 //                .offset(CGSize(width: 10, height: 0))
 //                .background(.green)
                 .frame(width: 300, height: 300)
-                .offset(CGSize(width: 0, height: 0))
-                //.position(CGPoint(x: 50, y: 50))
+                .offset(CGSize(width: 10, height: 0))
+                .position(CGPoint(x: 200, y: 250))
             
             Rectangle()
-                .foregroundStyle(.yellow)
+                .foregroundStyle(.appBlue300)
                 .frame(width: 140, height: 140)
+                .position(CGPointMake(100, 120))
         }
+        .border(.green)
     }
 }
 
