@@ -29,6 +29,16 @@ extension View {
         )
         .onPreferenceChange(GlobleFramePreferenceKey.self, perform: onChange)
     }
+    
+    func readFrame(in coordinate: CoordinateSpace, onChange: @escaping (CGRect) -> Void) -> some View {
+        background(
+            GeometryReader { geometryProxy in
+                Color.clear
+                    .preference(key: GlobleFramePreferenceKey.self, value: geometryProxy.frame(in: coordinate))
+            }
+        )
+        .onPreferenceChange(GlobleFramePreferenceKey.self, perform: onChange)
+    }
 }
 
 

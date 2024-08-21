@@ -71,7 +71,7 @@ extension AutoLayoutGrid {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
-        .animation(self.loaded ? animation : nil, value: UUID())
+        //.animation(self.loaded ? animation : nil, value: UUID())
     }
     
     private func layout() {

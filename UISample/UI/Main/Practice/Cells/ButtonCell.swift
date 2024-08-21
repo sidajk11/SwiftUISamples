@@ -34,7 +34,6 @@ struct ButtonCell: View {
                     .cornerRadius(12)
             }
             .buttonStyle(.plain)
-            
             .offset(x: viewModel.viewOffset.x + viewModel.translation.width, y: viewModel.viewOffset.y + viewModel.translation.height)
             .simultaneousGesture(
                 DragGesture()

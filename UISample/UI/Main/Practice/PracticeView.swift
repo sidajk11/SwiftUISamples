@@ -12,7 +12,6 @@ extension PracticeView {
     enum Route: Routable {
         case main
         case login
-        case translation(_ text: String)
     }
     
     // Builds the views
@@ -22,9 +21,6 @@ extension PracticeView {
             LoginView(viewModel: .init(baseViewModel: viewModel))
         case .main:
             MainView(viewModel: .init(baseViewModel: viewModel))
-        case .translation(let text):
-            TranslationPopup(text: text)
-                .presentationCompactAdaptation(.none)
         }
     }
 }
@@ -55,28 +51,15 @@ struct PracticeView: View {
     
     @State private var popoverFrame: CGRect = .zero
     
+    @State private var popoverText: String = ""
+    
+    @State private var containerFrameInGlobal: CGRect = .zero
+    
     var body: some View {
             //.position(popoverFrame.origin)
             //.frame(width: popoverFrame.width, height: popoverFrame.height)
         
         ZStack(alignment: .topLeading) {
-            Rectangle()
-                .foregroundStyle(.red)
-                //.position(popoverFrame.origin)
-                //.frame(width: popoverFrame.width, height: popoverFrame.height)
-                .offset(CGSize(width: 100, height: 100))
-                .background(.blue)
-                //.position(CGPoint(x: 150 + 50, y: 150 + 50))
-                .offset(CGSize(width: 100, height: 100))
-                .background(.green)
-                .frame(width: 100, height: 100)
-                .offset(CGSize(width: 100, height: 100))
-                //.position(CGPoint(x: 150 + 50, y: 150 + 50))
-                .popover(item: $presentRouter.popup, attachmentAnchor: .rect(.bounds)) { route in
-                    self.routing(for: route)
-                }
-                .border(.red)
-            
             content
                 .navigationTitle("Practice")
                 .toolbar {
@@ -101,8 +84,30 @@ struct PracticeView: View {
                     }
                 }
                 .toastView(isShow: $viewModel.isShowToast)
+            
+            if !popoverText.isEmpty {
+                ZStack {
+                    Color.clear
+                    ZStack {
+                        TranslationPopup(text: $popoverText)
+                            .background(.appGray300)
+                            .cornerRadius(10)
+                            .padding()
+                            
+                            
+                    }
+                    .position(CGPoint(x: popoverFrame.center.x, y: popoverFrame.center.y - containerFrameInGlobal.minY + popoverFrame.height))
+                }
+                .readFrameInGlobal { frame in
+                    containerFrameInGlobal = frame
+                }
+            }
         }
-        
+        .border(.red)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            popoverText = ""
+        }
     }
     
     var content: some View {
@@ -117,7 +122,8 @@ struct PracticeView: View {
                     let text = data.text.trimmingCharacters(in: .punctuationCharacters)
                     let translated = viewModel.words[text] ?? ""
                     popoverFrame = data.frameInGlobal
-                    presentRouter.popup(route: .translation(translated))
+                    popoverText = translated
+                    
                 }
                 return cell
             }
@@ -144,7 +150,6 @@ struct PracticeView: View {
                 }
                 return TextCellContainer(textCell: cell)
             }
-            .animation(.easeInOut(duration: 0.2), value: UUID())
             
             Spacer()
         }

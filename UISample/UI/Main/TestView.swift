@@ -14,7 +14,6 @@ extension TestView {
         case full
         case setting
         case profile
-        case translation
     }
     
     @ViewBuilder private func routing(route: Route) -> some View {
@@ -29,9 +28,6 @@ extension TestView {
             SettingView()
         case .profile:
             ProfileView()
-        case .translation:
-            TranslationPopup(text: "test")
-                .presentationCompactAdaptation(.none)
         }
     }
 }
@@ -79,7 +75,7 @@ struct TestView: View {
             }
             
             Button("Show Popup") {
-                presentRouter.popup(route: .translation)
+                
             }
             .popover(item: $presentRouter.popup) { route in
                 routing(route: route)

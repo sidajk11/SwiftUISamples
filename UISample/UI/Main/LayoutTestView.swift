@@ -9,10 +9,10 @@ import SwiftUI
 
 struct LayoutTestView: View {
     var body: some View {
-            Rectangle()
-            .foregroundStyle(.appGray300)
-            .overlay(contentAlignmentGuide)
-        //content
+//            Rectangle()
+//            .foregroundStyle(.appGray300)
+//            .overlay(contentAlignmentGuide)
+        content
     }
     
     var contentAlignmentGuide: some View {
@@ -36,7 +36,7 @@ struct LayoutTestView: View {
     }
     
     var content: some View {
-        ZStack(alignment: .center) {
+        ZStack(alignment: .leading) {
             Rectangle()
                 .foregroundStyle(.appBlue500)
             //.position(popoverFrame.origin)
@@ -47,8 +47,8 @@ struct LayoutTestView: View {
 //                .offset(CGSize(width: 10, height: 0))
 //                .background(.green)
                 .frame(width: 300, height: 300)
-                .offset(CGSize(width: 10, height: 0))
-                .position(CGPoint(x: 200, y: 250))
+                .offset(CGSize(width: 20, height: 0))
+                //.position(CGPoint(x: 200, y: 250))
             
             Rectangle()
                 .foregroundStyle(.appBlue300)
