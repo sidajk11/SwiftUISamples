@@ -35,16 +35,16 @@ struct ButtonCell: View {
             }
             .buttonStyle(.plain)
             .offset(x: viewModel.viewOffset.x + viewModel.translation.width, y: viewModel.viewOffset.y + viewModel.translation.height)
-            .simultaneousGesture(
-                DragGesture()
-                    .onChanged { value in
-                        viewModel.translation = value.translation
-                    }
-                    .onEnded { value in
-                        viewModel.translation = .zero
-                        viewModel.viewOffset = CGPoint(x: viewModel.viewOffset.x + viewModel.translation.width, y: viewModel.viewOffset.y + viewModel.translation.height)
-                    }
-            )
+//            .simultaneousGesture(
+//                DragGesture()
+//                    .onChanged { value in
+//                        viewModel.translation = value.translation
+//                    }
+//                    .onEnded { value in
+//                        viewModel.translation = .zero
+//                        viewModel.viewOffset = CGPoint(x: viewModel.viewOffset.x + viewModel.translation.width, y: viewModel.viewOffset.y + viewModel.translation.height)
+//                    }
+//            )
             .readFrameInGlobal { frame in
                 viewModel.frameInGlobal = frame
             }

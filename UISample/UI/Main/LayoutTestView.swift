@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LayoutTestView: View {
+    @State var offset: CGSize = .zero
+    
     var body: some View {
 //            Rectangle()
 //            .foregroundStyle(.appGray300)
@@ -47,13 +49,22 @@ struct LayoutTestView: View {
 //                .offset(CGSize(width: 10, height: 0))
 //                .background(.green)
                 .frame(width: 300, height: 300)
-                .offset(CGSize(width: 20, height: 0))
+                .offset(offset)
+                .animation(.easeInOut(duration: 1), value: UUID())
                 //.position(CGPoint(x: 200, y: 250))
             
             Rectangle()
                 .foregroundStyle(.appBlue300)
                 .frame(width: 140, height: 140)
                 .position(CGPointMake(100, 120))
+            
+            Button {
+                offset = CGSize(width: offset.width + 10, height: offset.height)
+            } label: {
+                Text("Move")
+            }
+            .offset(CGSize(width: 0, height: 200))
+
         }
         .border(.green)
     }

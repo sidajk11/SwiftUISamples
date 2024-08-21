@@ -55,6 +55,8 @@ struct PracticeView: View {
     
     @State private var containerFrameInGlobal: CGRect = .zero
     
+    @State private var offset: CGSize = .zero
+    
     var body: some View {
             //.position(popoverFrame.origin)
             //.frame(width: popoverFrame.width, height: popoverFrame.height)
@@ -77,31 +79,32 @@ struct PracticeView: View {
                         
                         Button {
                             isShowAlert.toggle()
+                            offset = CGSize(width: offset.width + 10, height: offset.height)
                         } label: {
                             Text("Alert")
                         }
 
                     }
                 }
-                .toastView(isShow: $viewModel.isShowToast)
+                //.toastView(isShow: $viewModel.isShowToast)
             
-            if !popoverText.isEmpty {
-                ZStack {
-                    Color.clear
-                    ZStack {
-                        TranslationPopup(text: $popoverText)
-                            .background(.appGray300)
-                            .cornerRadius(10)
-                            .padding()
-                            
-                            
-                    }
-                    .position(CGPoint(x: popoverFrame.center.x, y: popoverFrame.center.y - containerFrameInGlobal.minY + popoverFrame.height))
-                }
-                .readFrameInGlobal { frame in
-                    containerFrameInGlobal = frame
-                }
-            }
+//            if !popoverText.isEmpty {
+//                ZStack {
+//                    Color.clear
+//                    ZStack {
+//                        TranslationPopup(text: $popoverText)
+//                            .background(.appGray300)
+//                            .cornerRadius(10)
+//                            .padding()
+//                            
+//                            
+//                    }
+//                    .position(CGPoint(x: popoverFrame.center.x, y: popoverFrame.center.y - containerFrameInGlobal.minY + popoverFrame.height))
+//                }
+//                .readFrameInGlobal { frame in
+//                    containerFrameInGlobal = frame
+//                }
+//            }
         }
         .border(.red)
         .contentShape(Rectangle())
@@ -134,21 +137,23 @@ struct PracticeView: View {
                 let cell = ButtonCell(viewModel: data)
                 
                 data.action = {
-                    let position = viewModel.firstSpacePosition()
-                    if data.isMoved {
-                        if viewModel.answer.isEmpty {
-                            data.viewOffsetInGlobal = position
-                            viewModel.answer = data.text
-                        }
-                        else {
-                            data.isMoved = false
-                        }
-                    } else {
-                        data.viewOffset = .zero
-                        viewModel.answer = ""
-                    }
+                    offset = CGSize(width: offset.width + 10, height: offset.height)
+//                    let position = viewModel.firstSpacePosition()
+//                    if data.isMoved {
+//                        if viewModel.answer.isEmpty {
+//                            data.viewOffsetInGlobal = position
+//                            viewModel.answer = data.text
+//                        }
+//                        else {
+//                            data.isMoved = false
+//                        }
+//                    } else {
+//                        data.viewOffset = .zero
+//                        viewModel.answer = ""
+//                    }
                 }
                 return TextCellContainer(textCell: cell)
+                    .offset(offset)
             }
             
             Spacer()
