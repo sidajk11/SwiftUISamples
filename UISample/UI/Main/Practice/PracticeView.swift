@@ -83,7 +83,7 @@ struct PracticeView: View {
 
                     }
                 }
-                .toastView(isShow: $viewModel.isShowToast)
+                .toastView(isShow: $viewModel.isCorrect)
             
             if !popoverText.isEmpty {
                 ZStack {
@@ -112,47 +112,79 @@ struct PracticeView: View {
     
     var content: some View {
         VStack() {
-            AutoLayoutGrid(viewModel.textCellVMlist, alignment: .leading) { data in
-                let cell = TextCell(viewModel: data)
-                    .readFrameInGlobal { frame in
-                        data.frameInGlobal = frame
-                    }
-                    
-                data.action = {
-                    let text = data.text.trimmingCharacters(in: .punctuationCharacters)
-                    let translated = viewModel.words[text] ?? ""
-                    popoverFrame = data.frameInGlobal
-                    popoverText = translated
-                    
-                }
-                return cell
-            }
-            .padding(.bottom, 100)
-            .border(.green)
+            sentenceView
             
-            AutoLayoutGrid(viewModel.answerCellVMList, alignment: .center) { data in
-                let cell = ButtonCell(viewModel: data)
-                
-                data.action = {
-                    let position = viewModel.firstSpacePosition()
-                    if data.isMoved {
-                        if viewModel.answer.isEmpty {
-                            data.viewOffsetInGlobal = position
-                            viewModel.answer = data.text
-                        }
-                        else {
-                            data.isMoved = false
-                        }
-                    } else {
-                        data.viewOffset = .zero
-                        viewModel.answer = ""
-                    }
-                }
-                return TextCellContainer(textCell: cell)
-            }
+            answerView
             
             Spacer()
+            
+            confirmButton
+                .padding(.bottom, 24)
         }
+    }
+    
+    var sentenceView: some View {
+        AutoLayoutGrid(viewModel.textCellVMlist, alignment: .leading) { data in
+            let cell = TextCell(viewModel: data)
+                .readFrameInGlobal { frame in
+                    data.frameInGlobal = frame
+                }
+                
+            data.action = {
+                let text = data.text.trimmingCharacters(in: .punctuationCharacters)
+                let translated = viewModel.words[text] ?? ""
+                popoverFrame = data.frameInGlobal
+                popoverText = translated
+                
+            }
+            return cell
+        }
+        .padding(.bottom, 100)
+        .border(.green)
+    }
+    
+    var answerView: some View {
+        AutoLayoutGrid(viewModel.answerCellVMList, alignment: .center) { data in
+            let cell = ButtonCell(viewModel: data)
+            
+            data.action = {
+                let position = viewModel.firstSpacePosition()
+                if data.isMoved {
+                    if viewModel.answer.isEmpty {
+                        data.viewOffsetInGlobal = position
+                        viewModel.answer = data.text
+                    }
+                    else {
+                        data.isMoved = false
+                    }
+                } else {
+                    data.viewOffset = .zero
+                    viewModel.answer = ""
+                }
+            }
+            return TextCellContainer(textCell: cell)
+        }
+    }
+    
+    var confirmButton: some View {
+        Button {
+            if viewModel.done {
+                presentationMode.wrappedValue.dismiss()
+            }
+            else {
+                viewModel.checkAnswer()
+                viewModel.confirmButtonTitle = String(localized: "다음")
+                viewModel.done = true
+            }
+        } label: {
+            Text(viewModel.confirmButtonTitle)
+                .foregroundStyle(.appGray000)
+                .font(.h2)
+        }
+        .frame(minWidth: 100)
+        .padding()
+        .background(.appGray600)
+        .cornerRadius(10)
     }
 }
 
@@ -195,17 +227,16 @@ extension PracticeView {
         
         @Published var answerCellVMList: [ButtonCell.ViewModel] = []
         
+        @Published var confirmButtonTitle: String = String(localized: "확인")
+        
         var answer: String = "" {
             didSet {
-                if !answer.isEmpty {
-                    isShowToast = answer == correctAnswer
-                } else {
-                    isShowToast = false
-                }
+                
             }
         }
         
-        @Published var isShowToast: Bool = false
+        @Published var isCorrect: Bool = false
+        @Published var done: Bool = false
         
         var content: String = "That is a _ restaurant."
         var correctAnswer: String = "famous"
@@ -255,6 +286,14 @@ extension PracticeView {
             }
             
             self.answerCellVMList = list
+        }
+        
+        func checkAnswer() {
+            if !answer.isEmpty {
+                isCorrect = answer == correctAnswer
+            } else {
+                isCorrect = false
+            }
         }
         
         static func viewModel(container: DIContainer, lessonModel: LessonModel) -> ViewModel {
