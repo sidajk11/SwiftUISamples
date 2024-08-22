@@ -28,7 +28,14 @@ extension HomeView {
             SettingView()
         case .practice(let cellVM):
             if let lessonModel = cellVM.lessonModel {
-                PracticeView(viewModel: PracticeView.ViewModel.viewModel(container: viewModel.container, lessonModel: lessonModel))
+//                if Bool.random() {
+//                    PracticeCombineView(viewModel: PracticeCombineView.ViewModel.viewModel(container: viewModel.container, lessonModel: lessonModel))
+//                } else {
+//                    PracticeInputWordView(viewModel: PracticeInputWordView.ViewModel.viewModel(container: viewModel.container, lessonModel: lessonModel))
+//                }
+                
+                PracticeInputWordView(viewModel: PracticeInputWordView.ViewModel.viewModel(container: viewModel.container, lessonModel: lessonModel))
+                
                 //WeatherView(viewModel: .init(container: viewModel.container))
             }
         }

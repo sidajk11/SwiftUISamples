@@ -1,14 +1,13 @@
 //
-//  PracticeView.swift
+//  PracticeCombineView.swift
 //  UISample
 //
 //  Created by 정영민 on 2024/08/05.
 //
 
 import SwiftUI
-import WaterfallGrid
 
-extension PracticeView {
+extension PracticeCombineView {
     enum Route: Routable {
         case main
         case login
@@ -26,7 +25,7 @@ extension PracticeView {
 }
 
 
-struct PracticeView: View {
+struct PracticeCombineView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var viewModel: ViewModel
@@ -188,7 +187,7 @@ struct PracticeView: View {
     }
 }
 
-extension PracticeView {
+extension PracticeCombineView {
     func layout() {
         guard preferences.count > 0 else { return }
         guard geometrySize.width > .ulpOfOne else { return }
@@ -216,7 +215,7 @@ extension PracticeView {
     }
 }
 
-extension PracticeView {
+extension PracticeCombineView {
     class ViewModel: BaseViewModel {
         
         var lessonModel: LessonModel!
@@ -311,5 +310,5 @@ extension PracticeView {
 }
 
 #Preview {
-    PracticeView(viewModel: .init(container: .preview))
+    PracticeCombineView(viewModel: .init(container: .preview))
 }

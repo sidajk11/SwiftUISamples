@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TextCell: View {
-    let viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     
     private let padding: CGFloat = 0
     
@@ -31,6 +31,19 @@ struct TextCell: View {
     }
     
     var content: some View {
+        contentView()
+    }
+    
+    @ViewBuilder
+    private func contentView() -> some View {
+        if viewModel.type == .text {
+            textView
+        } else {
+            inputView
+        }
+    }
+    
+    var textView: some View {
         Button {
             print(viewModel.text)
             viewModel.action?()
@@ -42,11 +55,21 @@ struct TextCell: View {
         .buttonStyle(.plain)
         .padding(4)
     }
+    
+    var inputView: some View {
+        TextField("", text: $viewModel.text)
+            .buttonStyle(.plain)
+            .padding(4)
+            .frame(width: 100, height: 40)
+    }
 }
 
 extension TextCell {
     class ViewModel: BaseViewModel {
-        var text: String = ""
+        
+        @Published var type: CellType = .text
+        
+        @Published var text: String = ""
         var index: Int = 0
         
         var action: Callback?
@@ -55,6 +78,14 @@ extension TextCell {
         
         func onAppear() {
         }
+    }
+}
+
+extension TextCell {
+    enum CellType {
+        case text
+        case input
+        case space
     }
 }
 
