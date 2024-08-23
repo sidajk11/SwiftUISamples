@@ -262,7 +262,11 @@ extension PracticeCombineView {
             for i in 0 ..< count {
                 let component = components[i]
                 let cellVM = TextCell.ViewModel(container: container)
-                cellVM.text = component
+                if component == "_" {
+                    cellVM.type = .space
+                } else {
+                    cellVM.text = component
+                }
                 cellVM.index = i
                 dict[cellVM.id] = cellVM
                 list.append(cellVM)

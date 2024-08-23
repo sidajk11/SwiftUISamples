@@ -38,8 +38,10 @@ struct TextCell: View {
     private func contentView() -> some View {
         if viewModel.type == .text {
             textView
-        } else {
+        } else if viewModel.type == .input {
             inputView
+        } else {
+            spaceView
         }
     }
     
@@ -48,7 +50,7 @@ struct TextCell: View {
             print(viewModel.text)
             viewModel.action?()
         } label: {
-            Text(viewModel.text == "_" ? "" : viewModel.text)
+            Text(viewModel.text)
                 .font(.body1)
                 .padding(EdgeInsets(top: 0, leading: padding, bottom: 0, trailing: padding))
         }
@@ -62,6 +64,10 @@ struct TextCell: View {
             .padding(4)
             .frame(width: 100, height: 40)
     }
+    
+    var spaceView: some View {
+        Rectangle()
+    }
 }
 
 extension TextCell {
@@ -70,8 +76,6 @@ extension TextCell {
         @Published var type: CellType = .text
         
         @Published var text: String = ""
-        
-        @Published var isFocused: Bool
         
         var index: Int = 0
         

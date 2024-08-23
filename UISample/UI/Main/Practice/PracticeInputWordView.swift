@@ -106,7 +106,7 @@ struct PracticeInputWordView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             popoverText = ""
-            
+            hideKeyboard()
         }
     }
     
@@ -263,9 +263,10 @@ extension PracticeInputWordView {
             for i in 0 ..< count {
                 let component = components[i]
                 let cellVM = TextCell.ViewModel(container: container)
-                cellVM.text = component
                 if component == "_" {
                     cellVM.type = .input
+                } else {
+                    cellVM.text = component
                 }
                 cellVM.index = i
                 
