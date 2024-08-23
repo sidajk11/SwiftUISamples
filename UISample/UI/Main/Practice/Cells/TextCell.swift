@@ -70,6 +70,9 @@ extension TextCell {
         @Published var type: CellType = .text
         
         @Published var text: String = ""
+        
+        @Published var isFocused: Bool
+        
         var index: Int = 0
         
         var action: Callback?

@@ -106,6 +106,7 @@ struct PracticeInputWordView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             popoverText = ""
+            
         }
     }
     
@@ -263,8 +264,11 @@ extension PracticeInputWordView {
                 let component = components[i]
                 let cellVM = TextCell.ViewModel(container: container)
                 cellVM.text = component
+                if component == "_" {
+                    cellVM.type = .input
+                }
                 cellVM.index = i
-                cellVM.type = .input
+                
                 dict[cellVM.id] = cellVM
                 list.append(cellVM)
             }
