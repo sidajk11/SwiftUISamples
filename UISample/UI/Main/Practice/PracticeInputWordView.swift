@@ -114,7 +114,7 @@ struct PracticeInputWordView: View {
         VStack() {
             sentenceView
             
-            answerView
+            //answerView
             
             Spacer()
             
