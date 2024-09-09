@@ -11,6 +11,11 @@
 		640239142C69FBA400DA19C6 /* AutoLayoutGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */; };
 		640953F92C4E16940071FBBA /* db_model_v1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 640953F72C4E16940071FBBA /* db_model_v1.xcdatamodeld */; };
 		640953FC2C4E1EEC0071FBBA /* Dictionary+Json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640953FB2C4E1EEC0071FBBA /* Dictionary+Json.swift */; };
+		642AF2E32C76DD7800A14EFC /* PracticeInputWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AF2E22C76DD7800A14EFC /* PracticeInputWordView.swift */; };
+		642AF2E52C76DE0200A14EFC /* InputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AF2E42C76DE0200A14EFC /* InputCell.swift */; };
+		6438CB582C72D13300F2C098 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438CB572C72D13300F2C098 /* WeatherView.swift */; };
+		6438CB5A2C7311AE00F2C098 /* TranslationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438CB592C7311AE00F2C098 /* TranslationPopup.swift */; };
+		6438CB5C2C73347F00F2C098 /* LayoutTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6438CB5B2C73347F00F2C098 /* LayoutTestView.swift */; };
 		643C32662C17E17C00B60246 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32652C17E17C00B60246 /* MainView.swift */; };
 		643C32692C17E1AE00B60246 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C32682C17E1AE00B60246 /* Router.swift */; };
 		643C326B2C18068200B60246 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 643C326A2C18068200B60246 /* AppDelegate.swift */; };
@@ -48,7 +53,7 @@
 		64753CF62C624A8D00B8F8AF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CF32C624A8D00B8F8AF /* HomeView.swift */; };
 		64753CF72C624A8D00B8F8AF /* LessonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CF42C624A8D00B8F8AF /* LessonCell.swift */; };
 		64753CF82C624A8D00B8F8AF /* UnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CF52C624A8D00B8F8AF /* UnitView.swift */; };
-		64753CFD2C624A9D00B8F8AF /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CF92C624A9D00B8F8AF /* PracticeView.swift */; };
+		64753CFD2C624A9D00B8F8AF /* PracticeCombineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CF92C624A9D00B8F8AF /* PracticeCombineView.swift */; };
 		64753CFE2C624A9D00B8F8AF /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CFA2C624A9D00B8F8AF /* CellModel.swift */; };
 		64753CFF2C624A9D00B8F8AF /* TextCellContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753CFB2C624A9D00B8F8AF /* TextCellContainer.swift */; };
 		64753D052C626A4E00B8F8AF /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64753D042C626A4E00B8F8AF /* TextStyle.swift */; };
@@ -96,6 +101,7 @@
 		64B28D772C6F3CE5005A50BB /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B28D762C6F3CE5005A50BB /* Callback.swift */; };
 		64B28D792C6F43D4005A50BB /* FadeTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B28D782C6F43D4005A50BB /* FadeTransition.swift */; };
 		64C2A3642C50E56E00D46012 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C2A3632C50E56E00D46012 /* IntroView.swift */; };
+		64DDA5952C78420200BD76ED /* View+KeyboardHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DDA5942C78420200BD76ED /* View+KeyboardHidden.swift */; };
 		64E09DED2C09C4D600D763D9 /* UISampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E09DEC2C09C4D600D763D9 /* UISampleApp.swift */; };
 		64E09DEF2C09C4D600D763D9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E09DEE2C09C4D600D763D9 /* ContentView.swift */; };
 		64E09DF12C09C4D800D763D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64E09DF02C09C4D800D763D9 /* Assets.xcassets */; };
@@ -112,6 +118,11 @@
 		640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayoutGrid.swift; sourceTree = "<group>"; };
 		640953F82C4E16940071FBBA /* db_model_v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = db_model_v1.xcdatamodel; sourceTree = "<group>"; };
 		640953FB2C4E1EEC0071FBBA /* Dictionary+Json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Json.swift"; sourceTree = "<group>"; };
+		642AF2E22C76DD7800A14EFC /* PracticeInputWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeInputWordView.swift; sourceTree = "<group>"; };
+		642AF2E42C76DE0200A14EFC /* InputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
+		6438CB572C72D13300F2C098 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		6438CB592C7311AE00F2C098 /* TranslationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationPopup.swift; sourceTree = "<group>"; };
+		6438CB5B2C73347F00F2C098 /* LayoutTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTestView.swift; sourceTree = "<group>"; };
 		643C32652C17E17C00B60246 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		643C32682C17E1AE00B60246 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		643C326A2C18068200B60246 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,7 +159,7 @@
 		64753CF32C624A8D00B8F8AF /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		64753CF42C624A8D00B8F8AF /* LessonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LessonCell.swift; sourceTree = "<group>"; };
 		64753CF52C624A8D00B8F8AF /* UnitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitView.swift; sourceTree = "<group>"; };
-		64753CF92C624A9D00B8F8AF /* PracticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
+		64753CF92C624A9D00B8F8AF /* PracticeCombineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeCombineView.swift; sourceTree = "<group>"; };
 		64753CFA2C624A9D00B8F8AF /* CellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		64753CFB2C624A9D00B8F8AF /* TextCellContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextCellContainer.swift; sourceTree = "<group>"; };
 		64753D042C626A4E00B8F8AF /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
@@ -196,6 +207,7 @@
 		64B28D762C6F3CE5005A50BB /* Callback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callback.swift; sourceTree = "<group>"; };
 		64B28D782C6F43D4005A50BB /* FadeTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransition.swift; sourceTree = "<group>"; };
 		64C2A3632C50E56E00D46012 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
+		64DDA5942C78420200BD76ED /* View+KeyboardHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyboardHidden.swift"; sourceTree = "<group>"; };
 		64E09DE92C09C4D600D763D9 /* UISample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UISample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64E09DEC2C09C4D600D763D9 /* UISampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISampleApp.swift; sourceTree = "<group>"; };
 		64E09DEE2C09C4D600D763D9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -284,12 +296,15 @@
 			children = (
 				6491EE332C70302000BA9955 /* Cells */,
 				64753CFA2C624A9D00B8F8AF /* CellModel.swift */,
-				64753CF92C624A9D00B8F8AF /* PracticeView.swift */,
+				64753CF92C624A9D00B8F8AF /* PracticeCombineView.swift */,
+				642AF2E22C76DD7800A14EFC /* PracticeInputWordView.swift */,
 				640239132C69FBA400DA19C6 /* AutoLayoutGrid.swift */,
 				64A8727E2C6B22570017A799 /* TextCellContentType.swift */,
 				64B28D722C6F12D9005A50BB /* ToastView.swift */,
 				64B28D742C6F187F005A50BB /* ToastModifier.swift */,
 				64B28D782C6F43D4005A50BB /* FadeTransition.swift */,
+				6438CB572C72D13300F2C098 /* WeatherView.swift */,
+				6438CB592C7311AE00F2C098 /* TranslationPopup.swift */,
 			);
 			path = Practice;
 			sourceTree = "<group>";
@@ -298,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				645C3AF32C63071200BD9156 /* View+ReadSize.swift */,
+				64DDA5942C78420200BD76ED /* View+KeyboardHidden.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -471,6 +487,7 @@
 				64A872802C6B23F10017A799 /* TextCell.swift */,
 				64753CFB2C624A9D00B8F8AF /* TextCellContainer.swift */,
 				640239112C69F64000DA19C6 /* ButtonCell.swift */,
+				642AF2E42C76DE0200A14EFC /* InputCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -530,6 +547,7 @@
 			children = (
 				643C32652C17E17C00B60246 /* MainView.swift */,
 				645B762E2C53903C0052647B /* TestView.swift */,
+				6438CB5B2C73347F00F2C098 /* LayoutTestView.swift */,
 				645B5A752C60CC6300FB3C7D /* Practice */,
 			);
 			path = Main;
@@ -698,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				64753D052C626A4E00B8F8AF /* TextStyle.swift in Sources */,
+				6438CB5C2C73347F00F2C098 /* LayoutTestView.swift in Sources */,
 				64E09DF62C09C4D800D763D9 /* Persistence.swift in Sources */,
 				64753CF72C624A8D00B8F8AF /* LessonCell.swift in Sources */,
 				6474813A2C4B4C2A0034CB8A /* CoreDataStack.swift in Sources */,
@@ -707,6 +726,7 @@
 				6492D44C2C1B37B30050F7E7 /* ItemRepository.swift in Sources */,
 				649DEE472C5B64D000E9D504 /* LevelMO.swift in Sources */,
 				6492DDAB2C1937D50054FE06 /* Routable.swift in Sources */,
+				64DDA5952C78420200BD76ED /* View+KeyboardHidden.swift in Sources */,
 				64753D1A2C626FF000B8F8AF /* String+Size.swift in Sources */,
 				646706AE2C31220F008DB9E3 /* Item.swift in Sources */,
 				647481472C4B5BC20034CB8A /* LessonModel.swift in Sources */,
@@ -733,6 +753,7 @@
 				640953F92C4E16940071FBBA /* db_model_v1.xcdatamodeld in Sources */,
 				6492DDAD2C194B7D0054FE06 /* SettingView.swift in Sources */,
 				647481432C4B4C8E0034CB8A /* CoreDataHelpers.swift in Sources */,
+				642AF2E32C76DD7800A14EFC /* PracticeInputWordView.swift in Sources */,
 				649DEE492C5B64DA00E9D504 /* PracticeMO.swift in Sources */,
 				64B28D732C6F12D9005A50BB /* ToastView.swift in Sources */,
 				64B28D752C6F187F005A50BB /* ToastModifier.swift in Sources */,
@@ -742,13 +763,14 @@
 				6474812D2C4B3FA00034CB8A /* UserPermissionsService.swift in Sources */,
 				6492DDA72C19347C0054FE06 /* PresentingView.swift in Sources */,
 				6474813D2C4B4C3F0034CB8A /* Helpers.swift in Sources */,
+				6438CB582C72D13300F2C098 /* WeatherView.swift in Sources */,
 				6484BB702C1A9F1F00B1D158 /* ProfileView.swift in Sources */,
 				646706BB2C312E42008DB9E3 /* ItemService.swift in Sources */,
 				6474814A2C4B606A0034CB8A /* BaseViewModel.swift in Sources */,
 				6492D44A2C1B2E960050F7E7 /* MultipartFormCreator.swift in Sources */,
 				6492DDA52C1934660054FE06 /* SheetView.swift in Sources */,
 				6474814C2C4B60DB0034CB8A /* BaseView.swift in Sources */,
-				64753CFD2C624A9D00B8F8AF /* PracticeView.swift in Sources */,
+				64753CFD2C624A9D00B8F8AF /* PracticeCombineView.swift in Sources */,
 				64753D182C626FF000B8F8AF /* String+Range.swift in Sources */,
 				64B28D6F2C6F065E005A50BB /* BlurView.swift in Sources */,
 				64E09E002C09C57B00D763D9 /* LoginView.swift in Sources */,
@@ -761,6 +783,7 @@
 				64A872812C6B23F10017A799 /* TextCell.swift in Sources */,
 				6444EE2F2C5CBA2800FB5279 /* AppRootManager.swift in Sources */,
 				6474811C2C455F3A0034CB8A /* LoginService.swift in Sources */,
+				642AF2E52C76DE0200A14EFC /* InputCell.swift in Sources */,
 				64753D142C626FF000B8F8AF /* String+Date.swift in Sources */,
 				64753CFE2C624A9D00B8F8AF /* CellModel.swift in Sources */,
 				6484BB7A2C1AD0C600B1D158 /* APICall.swift in Sources */,
@@ -780,6 +803,7 @@
 				64753D072C626A8B00B8F8AF /* Font.swift in Sources */,
 				647481292C4B3ED90034CB8A /* Store.swift in Sources */,
 				6484BB772C1AA1D300B1D158 /* CloseButton.swift in Sources */,
+				6438CB5A2C7311AE00F2C098 /* TranslationPopup.swift in Sources */,
 				64A8727F2C6B22570017A799 /* TextCellContentType.swift in Sources */,
 				643C326B2C18068200B60246 /* AppDelegate.swift in Sources */,
 				6474812B2C4B3EF20034CB8A /* AppState.swift in Sources */,
@@ -932,7 +956,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -962,7 +986,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

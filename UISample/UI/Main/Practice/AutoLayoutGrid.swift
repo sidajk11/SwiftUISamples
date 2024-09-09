@@ -15,6 +15,7 @@ struct AutoLayoutGrid<Data, ID, Content>: View where Data : RandomAccessCollecti
     
     var animation: Animation? = nil
     
+    var alignment: HorizontalAlignment = .center
     @State private var geometrySize: CGSize = .zero
     @State private var preferences: [PreferenceSizeData] = []
     
@@ -22,7 +23,8 @@ struct AutoLayoutGrid<Data, ID, Content>: View where Data : RandomAccessCollecti
     private let horizontalPadding: CGFloat = 12
 
     @State private var loaded = false
-    @State private var gridHeight: CGFloat = 0
+    @State private var gridHeight: CGFloat?
+    @State private var gridWidth: CGFloat?
 
     @State private var alignmentGuides = [AnyHashable: CGPoint]() {
         didSet {
@@ -31,16 +33,20 @@ struct AutoLayoutGrid<Data, ID, Content>: View where Data : RandomAccessCollecti
     }
     
     var body: some View {
-        ZStack(alignment: .leading) {
+        HStack() {
             self.grid()
                 .onPreferenceChange(ElementPreferenceKey.self, perform: { preferences in
                     self.preferences = preferences
                     layout()
                 })
-            .background(.red)
+            .frame(width: gridWidth, height: gridHeight)
+            
+            if alignment == .leading {
+                Spacer()
+            }
         }
-        .frame(width: nil, height: gridHeight)
-        .frame(maxWidth: .infinity, maxHeight: nil)
+        .padding(.horizontal, 10)
+        .frame(maxWidth: .infinity)
         .readSize(onChange: { size in
             geometrySize = size
             layout()
@@ -65,7 +71,7 @@ extension AutoLayoutGrid {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
-        .animation(self.loaded ? animation : nil, value: UUID())
+        //.animation(self.loaded ? animation : nil, value: UUID())
     }
     
     private func layout() {
@@ -76,6 +82,7 @@ extension AutoLayoutGrid {
         
         var posX: CGFloat = 0
         var posY: CGFloat = 0
+        var width: CGFloat = 0
         var height: CGFloat = 0
         
         let containerWidth = geometrySize.width - horizontalPadding * 2
@@ -89,22 +96,27 @@ extension AutoLayoutGrid {
             let offset = CGPoint(x: 0 - (posX), y: 0 - (posY))
             alignmentGuides[preference.id] = offset
             
-            posX = posX + preferenceSizeWidth + horizontalSpacing
+            if width < posX + preferenceSizeWidth {
+                width = posX + preferenceSizeWidth
+            }
             
+            posX = posX + preferenceSizeWidth + horizontalSpacing
             height = posY + preferenceSizeHeight
         }
         
         self.alignmentGuides = alignmentGuides
         self.gridHeight = height
+        self.gridWidth = width
     }
 }
 
 extension AutoLayoutGrid where ID == Data.Element.ID, Data.Element : Identifiable {
 
-    init(_ data: Data, content: @escaping (Data.Element) -> Content) {
+    init(_ data: Data, alignment: HorizontalAlignment, content: @escaping (Data.Element) -> Content) {
         self.data = data
         self.dataId = \Data.Element.id
         self.content = content
+        self.alignment = alignment
     }
 }
 

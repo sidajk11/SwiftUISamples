@@ -9,7 +9,9 @@ import SwiftUI
 import Combine
 
 struct ButtonCell: View {
-    @StateObject var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
+    
+    @State private var animation: Bool = false
     
     private let padding: CGFloat = 10
     
@@ -22,20 +24,18 @@ struct ButtonCell: View {
     
     var content: some View {
         ZStack {
-            Button {
-                print(viewModel.text)
-                viewModel.isMoved.toggle()
-                viewModel.action?()
-            } label: {
-                Text(viewModel.text)
-                    .font(.subtitle1)
-                    .padding(EdgeInsets(top: 4, leading: padding, bottom: 4, trailing: padding))
-                    .background(.appGray200)
-                    .cornerRadius(12)
-            }
-            .buttonStyle(.plain)
-            
+            Text(viewModel.text)
+                .font(.subtitle1)
+                .padding(EdgeInsets(top: 4, leading: padding, bottom: 4, trailing: padding))
+                .background(.appGray200)
+                .cornerRadius(12)
+                .onTapGesture {
+                    animation = true
+                    viewModel.isMoved.toggle()
+                    viewModel.action?()
+                }
             .offset(x: viewModel.viewOffset.x + viewModel.translation.width, y: viewModel.viewOffset.y + viewModel.translation.height)
+            .animation(animation ? .easeInOut(duration: 0.25) : nil, value: UUID())
             .simultaneousGesture(
                 DragGesture()
                     .onChanged { value in
@@ -73,6 +73,7 @@ extension ButtonCell {
         }
         
         func onAppear() {
+            isAppeared = true
         }
     }
 }

@@ -16,6 +16,8 @@ class BaseViewModel: ObservableObject, Identifiable {
     let container: DIContainer
     let cancelBag = CancelBag()
     
+    @Published var isAppeared: Bool = false
+    
     static var preview: Self {
         .init(container: .preview)
     }
