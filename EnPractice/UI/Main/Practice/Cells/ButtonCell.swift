@@ -64,7 +64,6 @@ struct ButtonCell: View {
 
 extension ButtonCell {
     struct CellData: Identifiable {
-        typealias ID = UUID
         let id: UUID = UUID()
         
         let text: String

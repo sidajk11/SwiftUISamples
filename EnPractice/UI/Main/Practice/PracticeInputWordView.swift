@@ -114,7 +114,7 @@ struct PracticeInputWordView: View {
         VStack() {
             sentenceView
             
-            //answerView
+            answerView
             
             Spacer()
             
@@ -124,7 +124,7 @@ struct PracticeInputWordView: View {
     }
     
     var sentenceView: some View {
-        AutoLayoutGrid(viewModel.textCellDatalist, alignment: .leading) { data in
+        AutoLayoutGrid(viewModel.textCellDataList, alignment: .leading) { data in
             let cell = TextCell(data: data)
                 .readFrameInGlobal { frame in
                     data.frameInGlobal = frame
@@ -219,11 +219,6 @@ extension PracticeInputWordView {
         struct Dependency {
             let container: DIContainer
             let lessonModel: LessonModel
-            
-            static var preview: Self {
-                let model = LessonModel(levelNo: 1, unitNo: 1, id: UUID(), lessonNo: 1, title: "Preview", desc: "Preview")
-                return Self(container: .preview, lessonModel: model)
-            }
         }
         
         let dependency: Dependency
@@ -233,7 +228,7 @@ extension PracticeInputWordView {
         
         @Published var title: String = ""
         
-        @Published var textCellDatalist: [TextCell.CellData] = []
+        @Published var textCellDataList: [TextCell.CellData] = []
         
         @Published var answerCellDataList: [ButtonCell.CellData] = []
         
@@ -266,7 +261,7 @@ extension PracticeInputWordView {
         }
         
         func firstSpacePosition() -> CGPoint {
-            let frame = textCellDatalist.first(where: { $0.text == "_" })?.frameInGlobal
+            let frame = textCellDataList.first(where: { $0.text == "_" })?.frameInGlobal
             var position: CGPoint = .zero
             if let frame = frame {
                 position.x = frame.midX
@@ -295,7 +290,7 @@ extension PracticeInputWordView {
                 list.append(cellVM)
             }
             
-            self.textCellDatalist = list
+            self.textCellDataList = list
         }
         
         func fetchAnswers() {
@@ -308,7 +303,7 @@ extension PracticeInputWordView {
                 dict[cellData.id] = cellData
                 list.append(cellData)
             }
-            
+            debugPrint("answer count: \(list.count)")
             self.answerCellDataList = list
         }
         
@@ -323,6 +318,7 @@ extension PracticeInputWordView {
 }
 
 #Preview {
-    PracticeInputWordView(viewModel: .init(dependency: .preview))
+    let model = LessonModel(levelNo: 1, unitNo: 1, id: UUID(), lessonNo: 1, title: "Preview", desc: "Preview")
+    PracticeInputWordView(viewModel: .init(dependency: .init(container: .preview, lessonModel: model)))
 }
 

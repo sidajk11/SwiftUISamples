@@ -70,7 +70,7 @@
 		64300F642D32683300F27049 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300EDE2D32683300F27049 /* UIFont.swift */; };
 		64300F652D32683300F27049 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300EFD2D32683300F27049 /* TextCell.swift */; };
 		64300F662D32683300F27049 /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300F1D2D32683300F27049 /* Callback.swift */; };
-		64300F672D32683300F27049 /* VocabularyPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300F092D32683300F27049 /* VocabularyPracticeView.swift */; };
+		64300F672D32683300F27049 /* PracticeVocabularyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300F092D32683300F27049 /* PracticeVocabularyView.swift */; };
 		64300F682D32683300F27049 /* String+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300EE22D32683300F27049 /* String+Data.swift */; };
 		64300F692D32683300F27049 /* MultipartFormCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300EC62D32683300F27049 /* MultipartFormCreator.swift */; };
 		64300F6A2D32683300F27049 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300F202D32683300F27049 /* Helpers.swift */; };
@@ -121,6 +121,7 @@
 		64300F982D32683300F27049 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300F182D32683300F27049 /* SheetView.swift */; };
 		64300F9A2D326DA800F27049 /* LessonUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300F992D326DA300F27049 /* LessonUseCase.swift */; };
 		64300F9E2D34042B00F27049 /* HomeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300F9D2D34042900F27049 /* HomeData.swift */; };
+		64300FA02D355ABC00F27049 /* VocabularyPracticeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64300F9F2D355AA900F27049 /* VocabularyPracticeModel.swift */; };
 		6461E3812C61FD2C00ABA306 /* WaterfallGrid in Frameworks */ = {isa = PBXBuildFile; productRef = 6461E3802C61FD2C00ABA306 /* WaterfallGrid */; };
 /* End PBXBuildFile section */
 
@@ -212,7 +213,7 @@
 		64300F062D32683300F27049 /* ToastModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastModifier.swift; sourceTree = "<group>"; };
 		64300F072D32683300F27049 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		64300F082D32683300F27049 /* TranslationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationPopup.swift; sourceTree = "<group>"; };
-		64300F092D32683300F27049 /* VocabularyPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyPracticeView.swift; sourceTree = "<group>"; };
+		64300F092D32683300F27049 /* PracticeVocabularyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeVocabularyView.swift; sourceTree = "<group>"; };
 		64300F0A2D32683300F27049 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
 		64300F0C2D32683300F27049 /* LayoutTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTestView.swift; sourceTree = "<group>"; };
 		64300F0D2D32683300F27049 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -238,6 +239,7 @@
 		64300F282D32683300F27049 /* UISample.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UISample.xcdatamodel; sourceTree = "<group>"; };
 		64300F992D326DA300F27049 /* LessonUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonUseCase.swift; sourceTree = "<group>"; };
 		64300F9D2D34042900F27049 /* HomeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeData.swift; sourceTree = "<group>"; };
+		64300F9F2D355AA900F27049 /* VocabularyPracticeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyPracticeModel.swift; sourceTree = "<group>"; };
 		64E09DE92C09C4D600D763D9 /* EnPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -301,6 +303,7 @@
 				64300EAE2D32683300F27049 /* TokenModel.swift */,
 				64300EAF2D32683300F27049 /* UnitModel.swift */,
 				64300EB02D32683300F27049 /* UserModel.swift */,
+				64300F9F2D355AA900F27049 /* VocabularyPracticeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -546,7 +549,7 @@
 				64300F062D32683300F27049 /* ToastModifier.swift */,
 				64300F072D32683300F27049 /* ToastView.swift */,
 				64300F082D32683300F27049 /* TranslationPopup.swift */,
-				64300F092D32683300F27049 /* VocabularyPracticeView.swift */,
+				64300F092D32683300F27049 /* PracticeVocabularyView.swift */,
 				64300F0A2D32683300F27049 /* WeatherView.swift */,
 			);
 			path = Practice;
@@ -786,6 +789,7 @@
 				64300F462D32683300F27049 /* ItemRepository.swift in Sources */,
 				64300F472D32683300F27049 /* Store.swift in Sources */,
 				64300F482D32683300F27049 /* Routable.swift in Sources */,
+				64300FA02D355ABC00F27049 /* VocabularyPracticeModel.swift in Sources */,
 				64300F492D32683300F27049 /* LessonModel.swift in Sources */,
 				64300F4A2D32683300F27049 /* Expression.swift in Sources */,
 				64300F4B2D32683300F27049 /* CancelBag.swift in Sources */,
@@ -816,7 +820,7 @@
 				64300F642D32683300F27049 /* UIFont.swift in Sources */,
 				64300F652D32683300F27049 /* TextCell.swift in Sources */,
 				64300F662D32683300F27049 /* Callback.swift in Sources */,
-				64300F672D32683300F27049 /* VocabularyPracticeView.swift in Sources */,
+				64300F672D32683300F27049 /* PracticeVocabularyView.swift in Sources */,
 				64300F682D32683300F27049 /* String+Data.swift in Sources */,
 				64300F692D32683300F27049 /* MultipartFormCreator.swift in Sources */,
 				64300F6A2D32683300F27049 /* Helpers.swift in Sources */,
